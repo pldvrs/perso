@@ -11,8 +11,8 @@
   var STORAGE_KEY = 'pld-lang';   // partagé avec index.html : le choix suit d'une page à l'autre
 
   var TITLES = {
-    fr: 'Pierre-Louis Divaris, CFA — Fiche',
-    en: 'Pierre-Louis Divaris, CFA — Factsheet'
+    fr: 'Pierre-Louis Divaris, CFA · Fiche',
+    en: 'Pierre-Louis Divaris, CFA · Factsheet'
   };
 
   /* ---- Langue ---------------------------------------------------------- */

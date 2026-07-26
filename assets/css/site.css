@@ -128,6 +128,10 @@ h1, h2, h3 { font-family: var(--pl-font-display); letter-spacing: var(--pl-track
 }
 .pl-btn--ghost:hover { background: var(--pl-paper); }
 
+/* Un bouton qui mène à LinkedIn vire au bleu de la marque au survol :
+   le visiteur sait où il atterrit avant de cliquer. */
+.pl-btn--linkedin:hover { background: #0A66C2; border-color: #0A66C2; color: var(--pl-white); }
+
 /* Reticle — the brand signature. Ambient watermark / gold lock. */
 .pl-reticle { display: block; color: var(--pl-navy); }
 .pl-reticle--ambient { opacity: .05; }

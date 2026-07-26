@@ -12,11 +12,11 @@
 
   var META = {
     fr: {
-      title: 'Pierre-Louis Divaris, CFA — Ventes complexes en analytics',
+      title: 'Pierre-Louis Divaris, CFA · Ventes complexes en analytics',
       description: "Vente complexe de solutions d'analytics pour investisseurs institutionnels et gérants de fonds. Risque factoriel, crédit, liquidité, attribution de performance. CFA charterholder, Paris."
     },
     en: {
-      title: 'Pierre-Louis Divaris, CFA — Complex sales in analytics',
+      title: 'Pierre-Louis Divaris, CFA · Complex sales in analytics',
       description: 'Complex sales of analytics solutions to institutional investors and asset managers. Factor risk, credit, liquidity, performance attribution. CFA charterholder, Paris.'
     }
   };
