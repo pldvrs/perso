@@ -332,6 +332,19 @@ h1, h2, h3 { font-family: var(--pl-font-display); letter-spacing: var(--pl-track
   letter-spacing: -0.01em;
   margin: 14px 0 10px;
 }
+/* Appel à l'action discret sous le texte d'une carte. */
+.card-link {
+  display: inline-block;
+  margin-top: 16px;
+  font-family: var(--pl-font-mono);
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--pl-gold-deep);
+  border-bottom: 1px solid rgba(184, 134, 43, .45);
+}
+.card-link:hover { color: var(--pl-gold); border-bottom-color: var(--pl-gold); }
+
 .card-text {
   font-size: 16px;
   line-height: 1.55;
@@ -357,7 +370,7 @@ h1, h2, h3 { font-family: var(--pl-font-display); letter-spacing: var(--pl-track
 .timeline { display: flex; flex-direction: column; }
 .job {
   display: grid;
-  grid-template-columns: 92px 1fr;
+  grid-template-columns: 104px 1fr;
   gap: 20px;
   padding: 22px 0;
   border-top: 1px solid var(--pl-border);
