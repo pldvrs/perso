@@ -290,6 +290,9 @@ h1, h2, h3 { font-family: var(--pl-font-display); letter-spacing: var(--pl-track
   text-wrap: pretty;
 }
 
+.section-cta { display: flex; flex-wrap: wrap; gap: 16px 20px; align-items: center; }
+.section-cta .pl-label { max-width: 34ch; line-height: 1.8; }
+
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .grid-interests { display: grid; grid-template-columns: 1.25fr 1fr 1fr; gap: 20px; }
@@ -297,12 +300,25 @@ h1, h2, h3 { font-family: var(--pl-font-display); letter-spacing: var(--pl-track
 /* Expertise + interest cards share the numbered-label / title / body shape. */
 .card-index {
   font-family: var(--pl-font-mono);
-  font-size: 10px;
-  letter-spacing: .22em;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  color: rgba(14, 42, 78, .3);
+}
+.card-index--gold { color: var(--pl-gold); }
+
+/* Les outils derrière la promesse, en petit sous le texte de la carte. */
+.card-tags {
+  font-family: var(--pl-font-mono);
+  font-size: 9.5px;
+  letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--pl-muted);
+  margin: 18px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--pl-border);
+  line-height: 1.8;
 }
-.card-index--gold { color: var(--pl-gold-deep); }
 .card-title {
   font-weight: 600;
   font-size: 24px;
@@ -330,58 +346,6 @@ h1, h2, h3 { font-family: var(--pl-font-display); letter-spacing: var(--pl-track
   margin: 0;
   text-wrap: pretty;
 }
-
-
-/* ============================================================
-   Parcours — timeline + education card
-   ============================================================ */
-
-.path-grid {
-  padding-top: 80px;
-  padding-bottom: 80px;
-  display: grid;
-  grid-template-columns: 1.35fr 1fr;
-  gap: 64px;
-}
-.path-grid h2 { margin: 14px 0 36px; }
-
-.timeline { display: flex; flex-direction: column; }
-.job {
-  display: grid;
-  grid-template-columns: 104px 1fr;
-  gap: 20px;
-  padding: 22px 0;
-  border-top: 1px solid var(--pl-border);
-}
-.job:last-child { border-bottom: 1px solid var(--pl-border); }
-.job-date {
-  font-family: var(--pl-font-mono);
-  font-size: 11px;
-  letter-spacing: .12em;
-  color: var(--pl-muted);
-  padding-top: 4px;
-}
-.job--current .job-date { color: var(--pl-gold-deep); }
-.job-role {
-  font-family: var(--pl-font-display);
-  font-weight: 600;
-  font-size: 21px;
-  letter-spacing: -0.01em;
-}
-.job .pl-label { display: block; margin: 6px 0 8px; }
-.job p {
-  font-size: 16px;
-  line-height: 1.5;
-  color: var(--pl-prose-soft);
-  margin: 0;
-  text-wrap: pretty;
-}
-
-.edu-title { display: block; margin-bottom: 20px; color: var(--pl-gold-deep); letter-spacing: .22em; }
-.edu-list { display: flex; flex-direction: column; gap: 18px; }
-.edu-name { font-family: var(--pl-font-display); font-weight: 600; font-size: 18px; }
-.edu-meta { font-size: 15px; color: rgba(14, 42, 78, .7); line-height: 1.45; }
-.edu-rule { height: 1px; background: var(--pl-border-strong); }
 
 
 /* ============================================================
@@ -457,106 +421,6 @@ h1, h2, h3 { font-family: var(--pl-font-display); letter-spacing: var(--pl-track
 
 
 /* ============================================================
-   Boîte de contact
-   ============================================================ */
-
-#contact-dialog {
-  width: min(520px, calc(100vw - 32px));
-  padding: 0;
-  border: 1px solid var(--pl-border-strong);
-  border-radius: var(--pl-radius-lg);
-  background: var(--pl-white);
-  color: var(--pl-navy);
-  box-shadow: 0 24px 64px rgba(14, 42, 78, .28);
-  overflow: visible;
-}
-#contact-dialog::backdrop { background: rgba(9, 26, 49, .55); backdrop-filter: blur(3px); }
-
-.dialog-close-form { margin: 0; }
-.dialog-close-form button {
-  position: absolute;
-  top: 10px;
-  right: 12px;
-  width: 34px;
-  height: 34px;
-  border: none;
-  border-radius: var(--pl-radius-pill);
-  background: transparent;
-  color: var(--pl-muted);
-  font-size: 26px;
-  line-height: 1;
-  cursor: pointer;
-}
-.dialog-close-form button:hover { background: var(--pl-paper); color: var(--pl-navy); }
-
-.dialog-body { padding: 30px 30px 28px; }
-.dialog-body h2 {
-  font-family: var(--pl-font-display);
-  font-weight: 700;
-  font-size: 27px;
-  line-height: 1.1;
-  letter-spacing: var(--pl-track-tight);
-  margin: 12px 0 22px;
-}
-
-#contact-form label {
-  display: block;
-  font-family: var(--pl-font-mono);
-  font-size: 10px;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--pl-muted);
-  margin-bottom: 6px;
-}
-#contact-form input,
-#contact-form select,
-#contact-form textarea {
-  width: 100%;
-  font-family: var(--pl-font-body);
-  font-size: 16px;
-  color: var(--pl-navy);
-  background: var(--pl-white);
-  padding: 11px 13px;
-  margin-bottom: 16px;
-  border: 1px solid var(--pl-border-strong);
-  border-radius: var(--pl-radius-md);
-  transition: border-color var(--pl-dur-fast) var(--pl-ease);
-}
-#contact-form textarea { resize: vertical; min-height: 110px; line-height: 1.45; }
-#contact-form input:focus,
-#contact-form select:focus,
-#contact-form textarea:focus { border-color: var(--pl-gold); }
-#contact-form input[aria-invalid='true'],
-#contact-form textarea[aria-invalid='true'] { border-color: #B93A28; }
-#contact-form button[type='submit'] { width: 100%; margin-top: 4px; }
-
-/* Le champ que seuls les robots remplissent. */
-.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-
-.form-error {
-  font-size: 15px;
-  line-height: 1.45;
-  color: #B93A28;
-  margin: 0 0 14px;
-}
-.form-note {
-  font-size: 14px;
-  line-height: 1.45;
-  color: var(--pl-muted);
-  margin: 14px 0 0;
-  text-align: center;
-  text-wrap: pretty;
-}
-.sent-title {
-  font-family: var(--pl-font-display);
-  font-weight: 600;
-  font-size: 22px;
-  margin: 0 0 8px;
-}
-.sent-body { font-size: 16px; line-height: 1.5; color: var(--pl-prose); margin: 0 0 22px; }
-
-
-/* ============================================================
    Responsive — verified down to 380px
    ============================================================ */
 
@@ -567,22 +431,11 @@ h1, h2, h3 { font-family: var(--pl-font-display); letter-spacing: var(--pl-track
 @media (max-width: 860px) {
   [data-split], [data-cols] { grid-template-columns: 1fr !important; }
   .hero-grid { gap: 40px; }
-  .path-grid { gap: 40px; }
 }
 
 @media (max-width: 640px) {
   .site-nav { display: none; }
-
-  /* The email is one 30-character token — shrink it, and let it break if it
-     still doesn't fit rather than pushing the page sideways. */
-  .contact-actions .pl-btn {
-    font-size: 15px;
-    padding: 14px 18px;
-    max-width: 100%;
-    white-space: normal;
-    overflow-wrap: anywhere;
-  }
   .hero-grid { padding-top: 56px; padding-bottom: 48px; }
-  .section .wrap, .path-grid { padding-top: 56px; padding-bottom: 56px; }
+  .section .wrap { padding-top: 56px; padding-bottom: 56px; }
   .contact .wrap { padding-top: 64px; padding-bottom: 64px; }
 }

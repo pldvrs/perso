@@ -11,8 +11,10 @@ index.html              la page
 assets/css/tokens.css   couleurs, typographie, espacements
 assets/css/site.css     mise en page et composants
 assets/js/site.js       bascule FR/EN + apparition au scroll
+assets/js/fiche.js      graphique, accordéon et bascule de fiche.html
 assets/img/             portrait et favicon
 cv.html                 le CV, en HTML imprimable (bouton « Imprimer / PDF »)
+fiche.html              le parcours en fiche de fonds, bilingue et interactif
 demo.html               démo produit — parcours cliquable en 8 étapes
 demo/                   ce dont la démo a besoin (runtime, React, polices, icônes)
 CNAME                   domaine personnalisé
@@ -60,32 +62,13 @@ clic sur « EN » (le choix est mémorisé, et `?lang=en` force la langue dans u
 lien).
 
 Les titres de page et descriptions des deux langues sont en haut de
-`assets/js/site.js`, avec l'adresse mail.
+`assets/js/site.js`.
 
-## Le formulaire de contact
+## Le contact
 
-Les boutons « M'écrire » ouvrent une boîte de dialogue. Un site statique ne
-peut pas envoyer d'email tout seul : il lui faut un service qui reçoit le
-formulaire et le relaie. Tant qu'aucun service n'est configuré, le formulaire
-**bascule sur le client mail** du visiteur — le message est pré-rempli, mais
-c'est lui qui doit appuyer sur « envoyer ». Ça marche, c'est juste moins fluide.
-
-Pour un envoi direct, en deux minutes :
-
-1. Créer un formulaire sur [Formspree](https://formspree.io) ou
-   [Web3Forms](https://web3forms.com) — les deux ont une offre gratuite qui
-   suffit largement, et Web3Forms ne demande même pas de compte.
-2. Coller l'URL obtenue dans `FORM_ENDPOINT`, en haut de `assets/js/site.js` :
-
-   ```js
-   var FORM_ENDPOINT = 'https://formspree.io/f/xxxxxxx';
-   ```
-
-Le formulaire poste alors du JSON (`name`, `email`, `subject`, `message`) sans
-quitter la page, avec un écran de confirmation et un message d'erreur si le
-service ne répond pas. Un champ piège invisible écarte les robots.
-
-L'adresse de destination est `EMAIL`, juste au-dessus dans le même fichier.
+Il n'y a pas de formulaire : un site statique ne peut pas envoyer d'email
+tout seul, et un lien LinkedIn fait le travail sans dépendre d'un service
+tiers. Tous les appels à l'action pointent vers le profil.
 
 ## Le CV
 
@@ -100,8 +83,8 @@ recrutement lisent mal les mises en page décoratives.
 
 `demo.html` est un parcours cliquable en 8 étapes dans une maquette de
 téléphone : mini-test, plan de travail, cours manipulable, dossier d'élève,
-mock, carte de maîtrise, duel, cockpit. On y accède depuis la carte « IA &
-automatisation » du site, et la flèche en haut à gauche ramène à l'accueil.
+mock, carte de maîtrise, duel, cockpit. On y accède depuis la carte « IA
+générative » des centres d'intérêt, et la flèche en haut à gauche ramène à l'accueil.
 Les flèches ← et → du clavier changent d'étape.
 
 Contrairement au reste du site, cette page tourne sur le runtime de l'outil de
