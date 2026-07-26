@@ -12,9 +12,9 @@ assets/css/tokens.css   couleurs, typographie, espacements
 assets/css/site.css     mise en page et composants
 assets/js/site.js       bascule FR/EN + apparition au scroll
 assets/img/             portrait et favicon
+cv.html                 le CV, en HTML imprimable (bouton « Imprimer / PDF »)
 demo.html               démo produit — parcours cliquable en 8 étapes
 demo/                   ce dont la démo a besoin (runtime, React, polices, icônes)
-cv/                     déposer ici pierre-louis-divaris-cv.pdf
 CNAME                   domaine personnalisé
 ```
 
@@ -61,6 +61,40 @@ lien).
 
 Les titres de page et descriptions des deux langues sont en haut de
 `assets/js/site.js`, avec l'adresse mail.
+
+## Le formulaire de contact
+
+Les boutons « M'écrire » ouvrent une boîte de dialogue. Un site statique ne
+peut pas envoyer d'email tout seul : il lui faut un service qui reçoit le
+formulaire et le relaie. Tant qu'aucun service n'est configuré, le formulaire
+**bascule sur le client mail** du visiteur — le message est pré-rempli, mais
+c'est lui qui doit appuyer sur « envoyer ». Ça marche, c'est juste moins fluide.
+
+Pour un envoi direct, en deux minutes :
+
+1. Créer un formulaire sur [Formspree](https://formspree.io) ou
+   [Web3Forms](https://web3forms.com) — les deux ont une offre gratuite qui
+   suffit largement, et Web3Forms ne demande même pas de compte.
+2. Coller l'URL obtenue dans `FORM_ENDPOINT`, en haut de `assets/js/site.js` :
+
+   ```js
+   var FORM_ENDPOINT = 'https://formspree.io/f/xxxxxxx';
+   ```
+
+Le formulaire poste alors du JSON (`name`, `email`, `subject`, `message`) sans
+quitter la page, avec un écran de confirmation et un message d'erreur si le
+service ne répond pas. Un champ piège invisible écarte les robots.
+
+L'adresse de destination est `EMAIL`, juste au-dessus dans le même fichier.
+
+## Le CV
+
+`cv.html` est le CV en HTML, sur une page A4, avec un bouton « Imprimer /
+enregistrer en PDF » qui laisse le navigateur générer le PDF. Pas de fichier
+binaire à tenir à jour : le CV se modifie comme le reste du site.
+
+Il est en anglais et volontairement sobre — les robots des cabinets de
+recrutement lisent mal les mises en page décoratives.
 
 ## La démo produit
 

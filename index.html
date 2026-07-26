@@ -76,15 +76,13 @@
       <p class="hero-line" data-en="Complex sales in analytics. Risk, performance, portfolio construction.">Ventes complexes en analytics. Risque, performance, construction de portefeuille.</p>
       <p class="hero-body" data-en="I do complex sales: analytics solutions for institutional investors and asset managers. Factor risk, credit risk, liquidity, performance attribution. Long cycles, multiple stakeholders, a book of 20+ accounts worth millions of euros in ARR.">Je fais de la vente complexe : des solutions d'analytics pour investisseurs institutionnels et gérants de fonds. Risque factoriel, risque de crédit, liquidité, attribution de performance. Cycles longs, plusieurs décideurs, un book de plus de 20 comptes qui se compte en millions d'euros d'ARR.</p>
       <div class="hero-actions">
-        <a class="plain" data-mailto href="mailto:pierrelouis.divaris@outlook.com">
-          <span class="pl-btn pl-btn--primary pl-btn--lg" data-en="Email me">M'écrire</span>
-        </a>
-        <a class="plain" href="cv/pierre-louis-divaris-cv.pdf" download>
+        <button type="button" class="pl-btn pl-btn--primary pl-btn--lg" data-open-contact data-en="Email me">M'écrire</button>
+        <a class="plain" href="cv.html">
           <span class="pl-btn pl-btn--ghost pl-btn--lg">
             <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path d="M8 1.6v8.2M4.6 6.6 8 10l3.4-3.4M2.2 13.4h11.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
             </svg>
-            <span data-en="Download my CV">Télécharger le CV</span>
+            <span data-en="Read my CV">Voir le CV</span>
           </span>
         </a>
         <a class="link-mono" href="https://www.linkedin.com/in/pierrelouisdivaris/" target="_blank" rel="noopener">LinkedIn</a>
@@ -245,22 +243,7 @@
           <h3>Top Finance</h3>
         </div>
         <p class="card-body card-body--cta" data-en="Finance courses and exam prep, for students and professionals. Email me to find out more.">Des cours de finance et de la préparation aux examens, pour étudiants et professionnels. Écris-moi pour en savoir plus.</p>
-        <a class="plain" data-mailto-course href="mailto:pierrelouis.divaris@outlook.com?subject=Cours%20de%20finance">
-          <span class="pl-btn pl-btn--secondary" data-en="Contact me">Me contacter</span>
-        </a>
-      </article>
-
-      <article class="pl-card">
-        <div class="card-head">
-          <h3 data-en="Vice-president, HEC Montréal student association">Vice-président, association étudiante d'HEC Montréal</h3>
-          <span class="pl-label">2017–18</span>
-        </div>
-        <p class="card-body" data-en="Elected by the students on campus, member of the executive committee. Co-managed the annual budget, ran seven subsidiary associations, and created the Bachelor's first orientation days.">Élu par les étudiants du campus, membre du comité exécutif. Cogestion du budget annuel, sept filiales sous ma responsabilité, et création des premières journées d'orientation du Bachelor.</p>
-        <div class="badge-row">
-          <span class="pl-badge" data-en="Elected by 4,000 students">Élu par 4 000 étudiants</span>
-          <span class="pl-badge" data-en="€1.3M budget">Budget de 1,3 M€</span>
-          <span class="pl-badge" data-en="300 volunteers">300 bénévoles</span>
-        </div>
+        <button type="button" class="pl-btn pl-btn--secondary" data-open-contact data-subject="course" data-en="Contact me">Me contacter</button>
       </article>
 
       <article class="pl-card pl-card--paper pl-card--dashed">
@@ -321,11 +304,9 @@
     <p data-en="A portfolio question, a training need, an opportunity. Email is still the most direct route.">Une question sur un portefeuille, un besoin de formation, une opportunité. Le mail reste le plus direct.</p>
 
     <div class="contact-actions">
-      <a class="plain" data-mailto href="mailto:pierrelouis.divaris@outlook.com">
-        <span class="pl-btn pl-btn--primary pl-btn--lg" data-email>pierrelouis.divaris@outlook.com</span>
-      </a>
+      <button type="button" class="pl-btn pl-btn--primary pl-btn--lg" data-open-contact data-en="Write to me">M'écrire</button>
       <a class="link-mono" href="https://www.linkedin.com/in/pierrelouisdivaris/" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="link-mono" href="cv/pierre-louis-divaris-cv.pdf" download>CV (PDF)</a>
+      <a class="link-mono" href="cv.html">CV</a>
     </div>
 
     <footer class="site-footer">
@@ -336,6 +317,54 @@
 </section>
 
 </main>
+
+<!-- Boîte de contact. Le <dialog> natif gère le focus, Échap et le fond. -->
+<dialog id="contact-dialog" aria-labelledby="contact-dialog-title">
+  <form method="dialog" class="dialog-close-form">
+    <button value="close" aria-label="Fermer" data-en-aria="Close">&times;</button>
+  </form>
+
+  <div class="dialog-body">
+    <span class="pl-eyebrow" data-en="Write to me">M'écrire</span>
+    <h2 id="contact-dialog-title" data-en="What can I do for you?">Qu'est-ce que je peux faire pour vous&nbsp;?</h2>
+
+    <form id="contact-form" novalidate>
+      <label for="cf-name" data-en="Your name">Votre nom</label>
+      <input id="cf-name" name="name" type="text" autocomplete="name" required>
+
+      <label for="cf-email" data-en="Your email">Votre email</label>
+      <input id="cf-email" name="email" type="email" autocomplete="email" required>
+
+      <label for="cf-subject" data-en="Subject">Sujet</label>
+      <select id="cf-subject" name="subject">
+        <option value="opportunity" data-en="An opportunity">Une opportunité</option>
+        <option value="portfolio" data-en="A portfolio question">Une question sur un portefeuille</option>
+        <option value="course" data-en="Finance courses">Des cours de finance</option>
+        <option value="other" data-en="Something else">Autre chose</option>
+      </select>
+
+      <label for="cf-message" data-en="Your message">Votre message</label>
+      <textarea id="cf-message" name="message" rows="5" required></textarea>
+
+      <!-- Piège à robots : invisible pour un humain, rempli par les spammeurs. -->
+      <div class="hp" aria-hidden="true">
+        <label for="cf-company">Ne pas remplir</label>
+        <input id="cf-company" name="company" type="text" tabindex="-1" autocomplete="off">
+      </div>
+
+      <p class="form-error" id="cf-error" role="alert" hidden></p>
+
+      <button type="submit" class="pl-btn pl-btn--primary pl-btn--lg" data-en="Send">Envoyer</button>
+      <p class="form-note" data-en="Goes straight to my inbox. I answer within a couple of days.">Ça arrive directement dans ma boîte mail. Je réponds sous deux ou trois jours.</p>
+    </form>
+
+    <div id="contact-sent" hidden>
+      <p class="sent-title" data-en="Message sent.">Message envoyé.</p>
+      <p class="sent-body" data-en="Thanks — I'll get back to you shortly.">Merci, je reviens vers vous rapidement.</p>
+      <button type="button" class="pl-btn pl-btn--ghost" data-close-contact data-en="Close">Fermer</button>
+    </div>
+  </div>
+</dialog>
 
 <script src="assets/js/site.js"></script>
 </body>
