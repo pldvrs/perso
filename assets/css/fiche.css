@@ -161,7 +161,7 @@ h2 {
 /* ---- Répartition ---- */
 
 .alloc { display: flex; flex-direction: column; gap: 10px; }
-.alloc-row { display: grid; grid-template-columns: 190px 1fr 44px; gap: 14px; align-items: center; }
+.alloc-row { display: grid; grid-template-columns: 240px 1fr 44px; gap: 14px; align-items: center; }
 .alloc-name { font-size: 15.5px; line-height: 1.2; }
 .alloc-track { height: 7px; background: rgba(14, 42, 78, .07); border-radius: var(--pl-radius-pill); overflow: hidden; }
 .alloc-bar {
