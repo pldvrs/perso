@@ -1,0 +1,497 @@
+/* ============================================================
+   pierrelouisdivaris.com
+   Single page, FR by default with an EN toggle.
+   Section order: hero → expertise → parcours → transmission
+   → intérêts → contact.
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--pl-white);
+  color: var(--pl-navy);
+  font-family: var(--pl-font-body);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--pl-navy);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(184, 134, 43, .45);
+}
+a:hover { color: var(--pl-gold-deep); border-bottom-color: var(--pl-gold); }
+a.plain { border-bottom: none; }
+a.plain:hover { color: inherit; }
+
+img { max-width: 100%; }
+
+h1, h2, h3 { font-family: var(--pl-font-display); letter-spacing: var(--pl-track-tight); }
+
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+/* Skip link — only visible once focused. */
+.skip {
+  position: absolute; left: -9999px; top: 0; z-index: 40;
+  background: var(--pl-navy); color: var(--pl-white);
+  padding: 10px 16px; border: none; border-radius: 0 0 var(--pl-radius-md) 0;
+  font-family: var(--pl-font-mono); font-size: 11px;
+  letter-spacing: .14em; text-transform: uppercase;
+}
+.skip:focus { left: 0; color: var(--pl-white); }
+
+
+/* ============================================================
+   Composants réutilisables
+   ============================================================ */
+
+/* Eyebrow — mono uppercase kicker, gold by default. */
+.pl-eyebrow {
+  display: inline-block;
+  font-family: var(--pl-font-mono);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: var(--pl-track-eyebrow);
+  text-transform: uppercase;
+  color: var(--pl-gold-deep);
+}
+
+/* Mono label — the small uppercase caption used for companies, stats, nav. */
+.pl-label {
+  font-family: var(--pl-font-mono);
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--pl-muted);
+}
+
+/* Card — white surface; `paper` alternates, `accent` adds the gold top rule. */
+.pl-card {
+  background: var(--pl-white);
+  border: 1px solid var(--pl-border);
+  border-radius: var(--pl-radius-lg);
+  box-shadow: var(--pl-shadow-sm);
+  padding: 28px;
+}
+.pl-card--paper  { background: var(--pl-paper); }
+.pl-card--accent { border-top: 3px solid var(--pl-gold); }
+.pl-card--dashed { border-style: dashed; }
+
+/* Badge — small mono pill. Gold is the only filled accent. */
+.pl-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--pl-font-mono);
+  font-weight: 500;
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--pl-navy);
+  background: rgba(14, 42, 78, .07);
+  padding: 4px 10px;
+  border-radius: var(--pl-radius-pill);
+}
+.pl-badge--gold { color: var(--pl-gold-deep); background: rgba(184, 134, 43, .12); }
+
+/* Button — gold primary is rare, one key action per screen. */
+.pl-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--pl-font-display);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  padding: 12px 22px;
+  min-height: 44px;
+  border: 1px solid transparent;
+  border-radius: var(--pl-radius-lg);
+  background: var(--pl-navy);
+  color: var(--pl-white);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--pl-dur-fast) var(--pl-ease),
+              color var(--pl-dur-fast) var(--pl-ease),
+              border-color var(--pl-dur-fast) var(--pl-ease);
+}
+.pl-btn--lg { padding: 15px 28px; font-size: 17px; min-height: 52px; }
+.pl-btn--primary { background: var(--pl-gold); color: var(--pl-white); }
+.pl-btn--primary:hover { background: var(--pl-gold-deep); }
+.pl-btn--secondary:hover { background: var(--pl-navy-deep); }
+.pl-btn--ghost {
+  background: transparent;
+  color: var(--pl-navy);
+  border-color: var(--pl-border-strong);
+}
+.pl-btn--ghost:hover { background: var(--pl-paper); }
+
+/* Reticle — the brand signature. Ambient watermark / gold lock. */
+.pl-reticle { display: block; color: var(--pl-navy); }
+.pl-reticle--ambient { opacity: .05; }
+
+/* Ceremonial band — the only dark surface. */
+.pl-ceremonial { background: var(--pl-ceremonial-bg); color: var(--pl-ceremonial-fg); }
+
+
+/* ============================================================
+   Header
+   ============================================================ */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(255, 255, 255, .92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--pl-border);
+}
+.site-header .wrap {
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand span {
+  font-family: var(--pl-font-mono);
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--pl-navy);
+}
+.header-right { display: flex; align-items: center; gap: 20px; }
+
+.site-nav { display: flex; gap: 20px; }
+.site-nav a {
+  border-bottom: none;
+  color: var(--pl-muted);
+  font-family: var(--pl-font-mono);
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.site-nav a:hover { color: var(--pl-navy); }
+
+.lang-switch {
+  display: flex;
+  border: 1px solid var(--pl-border-strong);
+  border-radius: var(--pl-radius-pill);
+  overflow: hidden;
+}
+.lang-switch button {
+  border: none;
+  padding: 6px 11px;
+  cursor: pointer;
+  font-family: var(--pl-font-mono);
+  font-size: 10px;
+  letter-spacing: .12em;
+  background: transparent;
+  color: var(--pl-muted);
+}
+.lang-switch button[aria-pressed='true'] { background: var(--pl-navy); color: var(--pl-white); }
+
+
+/* ============================================================
+   Hero
+   ============================================================ */
+
+.hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--pl-border); }
+.hero-reticle { position: absolute; top: -120px; right: -140px; pointer-events: none; }
+
+.hero-grid {
+  position: relative;
+  padding-top: 88px;
+  padding-bottom: 72px;
+  display: grid;
+  grid-template-columns: 1.55fr .95fr;
+  gap: 56px;
+  align-items: center;
+}
+.hero-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+.hero h1 {
+  font-weight: 700;
+  font-size: clamp(44px, 7vw, 76px);
+  line-height: 1.02;
+  margin: 0 0 18px;
+}
+.hero-line {
+  font-family: var(--pl-font-display);
+  font-weight: 600;
+  font-size: clamp(20px, 2.4vw, 27px);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 0 0 22px;
+  max-width: 24ch;
+  text-wrap: pretty;
+}
+.hero-body {
+  font-size: 18px;
+  line-height: 1.55;
+  color: rgba(14, 42, 78, .78);
+  margin: 0 0 32px;
+  max-width: 56ch;
+  text-wrap: pretty;
+}
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.hero-actions .link-mono { margin-left: 6px; }
+
+.link-mono {
+  font-family: var(--pl-font-mono);
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+/* Portrait, with the offset rule behind it. */
+.portrait { display: flex; justify-content: center; }
+.portrait-inner { position: relative; width: 100%; max-width: 300px; }
+.portrait-inner::before {
+  content: '';
+  position: absolute;
+  inset: 14px -14px -14px 14px;
+  border: 1px solid var(--pl-border-strong);
+  border-radius: var(--pl-radius-lg);
+}
+.portrait img {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--pl-radius-lg);
+  box-shadow: var(--pl-shadow-md);
+}
+
+/* Stat band — hairline grid built from a 1px gap over the border colour. */
+.stats-wrap { padding-bottom: 56px; }
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--pl-border);
+  border: 1px solid var(--pl-border);
+  border-radius: var(--pl-radius-lg);
+  overflow: hidden;
+}
+.stat { background: var(--pl-white); padding: 20px 22px; }
+.stat-figure {
+  font-family: var(--pl-font-display);
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: var(--pl-track-tight);
+}
+.stat .pl-label { display: block; margin-top: 8px; }
+
+
+/* ============================================================
+   Sections
+   ============================================================ */
+
+.section { border-bottom: 1px solid var(--pl-border); }
+.section--paper { background: var(--pl-paper); }
+.section .wrap { padding-top: 80px; padding-bottom: 80px; }
+
+.section h2 {
+  font-weight: 700;
+  font-size: clamp(30px, 4vw, 44px);
+  line-height: 1.05;
+  margin: 14px 0;
+}
+.section-intro {
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--pl-prose);
+  max-width: 62ch;
+  margin: 0 0 44px;
+  text-wrap: pretty;
+}
+
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.grid-interests { display: grid; grid-template-columns: 1.25fr 1fr 1fr; gap: 20px; }
+
+/* Expertise + interest cards share the numbered-label / title / body shape. */
+.card-index {
+  font-family: var(--pl-font-mono);
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--pl-muted);
+}
+.card-index--gold { color: var(--pl-gold-deep); }
+.card-title {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 14px 0 10px;
+}
+.card-text {
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--pl-prose);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+
+/* ============================================================
+   Parcours — timeline + education card
+   ============================================================ */
+
+.path-grid {
+  padding-top: 80px;
+  padding-bottom: 80px;
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 64px;
+}
+.path-grid h2 { margin: 14px 0 36px; }
+
+.timeline { display: flex; flex-direction: column; }
+.job {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  gap: 20px;
+  padding: 22px 0;
+  border-top: 1px solid var(--pl-border);
+}
+.job:last-child { border-bottom: 1px solid var(--pl-border); }
+.job-date {
+  font-family: var(--pl-font-mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  color: var(--pl-muted);
+  padding-top: 4px;
+}
+.job--current .job-date { color: var(--pl-gold-deep); }
+.job-role {
+  font-family: var(--pl-font-display);
+  font-weight: 600;
+  font-size: 21px;
+  letter-spacing: -0.01em;
+}
+.job .pl-label { display: block; margin: 6px 0 8px; }
+.job p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--pl-prose-soft);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.edu-title { display: block; margin-bottom: 20px; color: var(--pl-gold-deep); letter-spacing: .22em; }
+.edu-list { display: flex; flex-direction: column; gap: 18px; }
+.edu-name { font-family: var(--pl-font-display); font-weight: 600; font-size: 18px; }
+.edu-meta { font-size: 15px; color: rgba(14, 42, 78, .7); line-height: 1.45; }
+.edu-rule { height: 1px; background: var(--pl-border-strong); }
+
+
+/* ============================================================
+   Transmission
+   ============================================================ */
+
+/* Wraps rather than forcing the card wider than its column on narrow screens. */
+.card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.card-head h3 { font-size: 22px; margin: 0 0 10px; min-width: 0; }
+.card-head .pl-label { white-space: nowrap; padding-top: 4px; letter-spacing: .16em; }
+
+.pl-card--dashed .card-head { margin-bottom: 10px; }
+.pl-card--dashed .card-head h3 { margin: 0; }
+
+.card-body { font-size: 16px; line-height: 1.5; color: var(--pl-prose); margin: 0 0 16px; }
+.card-body--last { margin-bottom: 0; }
+.card-body--cta { margin-bottom: 20px; text-wrap: pretty; }
+.badge-row { display: flex; flex-wrap: wrap; gap: 8px; }
+
+
+/* ============================================================
+   Contact — the ceremonial closing band
+   ============================================================ */
+
+.contact { position: relative; overflow: hidden; }
+.contact-reticle { position: absolute; bottom: -180px; left: -120px; opacity: .07; pointer-events: none; }
+.contact .wrap { position: relative; padding-top: 88px; padding-bottom: 88px; }
+.contact-eyebrow { color: var(--pl-gold-light); letter-spacing: .22em; }
+.contact h2 {
+  font-weight: 700;
+  font-size: clamp(34px, 5vw, 56px);
+  line-height: 1.04;
+  margin: 16px 0 18px;
+  max-width: 24ch;
+}
+.contact p {
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--pl-ceremonial-muted);
+  max-width: 54ch;
+  margin: 0 0 34px;
+  text-wrap: pretty;
+}
+.contact-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.contact-actions a:not(.plain) {
+  font-size: 11px;
+  letter-spacing: .2em;
+  color: var(--pl-white);
+  border-bottom-color: rgba(239, 217, 161, .5);
+}
+.contact-actions a:not(.plain):hover { color: var(--pl-gold-light); border-bottom-color: var(--pl-gold-light); }
+
+.site-footer {
+  margin-top: 64px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, .14);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+  font-family: var(--pl-font-mono);
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .5);
+}
+
+
+/* ============================================================
+   Responsive — verified down to 380px
+   ============================================================ */
+
+/* Grid children default to min-width:auto, which lets a long unbreakable word
+   push a track wider than the page. Zero lets the text wrap instead. */
+[data-cols] > *, [data-split] > * { min-width: 0; }
+
+@media (max-width: 860px) {
+  [data-split], [data-cols] { grid-template-columns: 1fr !important; }
+  .hero-grid { gap: 40px; }
+  .path-grid { gap: 40px; }
+}
+
+@media (max-width: 640px) {
+  .site-nav { display: none; }
+
+  /* The email is one 30-character token — shrink it, and let it break if it
+     still doesn't fit rather than pushing the page sideways. */
+  .contact-actions .pl-btn {
+    font-size: 15px;
+    padding: 14px 18px;
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  .hero-grid { padding-top: 56px; padding-bottom: 48px; }
+  .section .wrap, .path-grid { padding-top: 56px; padding-bottom: 56px; }
+  .contact .wrap { padding-top: 64px; padding-bottom: 64px; }
+}

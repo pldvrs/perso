@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Démo produit — Pierre-Louis Divaris</title>
+<meta name="description" content="Parcours cliquable d'une plateforme de préparation d'examens : base SQL, plan de travail qui se recalibre, agent IA qui lit le dossier de l'élève. Conçue, développée et déployée en solo.">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Démo produit — Pierre-Louis Divaris">
+<meta property="og:description" content="Un exemple de ce que je construis : parcours cliquable en 8 étapes.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0E2A4E">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<script src="demo/vendor/react.production.min.js"></script>
+<script src="demo/vendor/react-dom.production.min.js"></script>
+<script src="demo/runtime.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="demo/tokens/fonts.css">
+  <style>
+    body{margin:0;background:#E9E7E1;font-family:'Crimson Pro',serif}
+    a{color:#8E6817;text-decoration:none} a:hover{color:#B8862B}
+    @keyframes fsFadeIn{from{opacity:0}to{opacity:1}}
+    @keyframes fsRise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fsSheet{from{opacity:0;transform:translateY(60px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fsLockGlow{0%{box-shadow:0 0 0 0 rgba(255,203,71,0)}40%{box-shadow:0 0 0 8px rgba(255,203,71,.3)}100%{box-shadow:0 0 0 3px rgba(255,203,71,0)}}
+    @keyframes fsBarGrow{from{width:0}}
+    #fsRateM{-webkit-appearance:none;appearance:none}
+    #fsRateM::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:24px;height:24px;border-radius:50%;background:#fff;border:3px solid #2F6BDB;box-shadow:0 2px 8px rgba(0,0,0,0.45);cursor:pointer}
+    #fsRateM::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#fff;border:3px solid #2F6BDB;cursor:pointer}
+    .no-scrollbar::-webkit-scrollbar{display:none}
+    @media (prefers-reduced-motion: reduce){*{animation:none!important}}
+    @media (max-width: 899px){ [data-demo-panel]{display:none!important} [data-demo-intro]{display:block!important} }
+    @media (min-width: 900px){ [data-fix]{ left: calc(50% + 228px) !important; } }
+  </style>
+</helmet>
+
+<div data-screen-label="Démo produit" style="min-height:100vh;display:flex;justify-content:center;align-items:flex-start;gap:56px;background:#E9E7E1;padding:0 24px">
+
+  <aside data-demo-panel style="position:sticky;top:0;width:400px;flex:none;padding:64px 0;display:flex;flex-direction:column;gap:22px">
+    <a href="index.html" style="display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.18em;color:#8E6817;border:none">← PIERRELOUISDIVARIS.COM</a>
+    <div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.22em;color:#8E6817;margin-bottom:10px">DÉMO · PROJET PERSONNEL</div>
+      <h1 style="margin:0;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:38px;line-height:1.05;letter-spacing:-0.02em;color:#0E2A4E">Un exemple de ce que je construis.</h1>
+    </div>
+    <p style="margin:0;font-family:'Crimson Pro',serif;font-size:17px;line-height:1.55;color:#3D4C66;text-wrap:pretty">Une plateforme de préparation d'examens que j'ai conçue, développée et déployée seul, avec l'IA comme outil de travail. Ce que tu vois est un parcours cliquable : le vrai produit tourne derrière.</p>
+    <div style="background:#fff;border:1px solid rgba(14,42,78,0.1);border-radius:14px;padding:20px 22px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.2em;color:#8A93A6;margin-bottom:14px">SOUS LE CAPOT</div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;gap:10px;align-items:baseline"><span style="flex:none;width:6px;height:6px;border-radius:50%;background:#B8862B;transform:translateY(-2px)"></span><span style="font-family:'Crimson Pro',serif;font-size:15.5px;line-height:1.45;color:#3D4C66"><strong style="color:#0E2A4E;font-weight:600">Base SQL</strong> — comptes, plans d'étude, historique de réponses, tout est persisté et requêtable.</span></div>
+        <div style="display:flex;gap:10px;align-items:baseline"><span style="flex:none;width:6px;height:6px;border-radius:50%;background:#B8862B;transform:translateY(-2px)"></span><span style="font-family:'Crimson Pro',serif;font-size:15.5px;line-height:1.45;color:#3D4C66"><strong style="color:#0E2A4E;font-weight:600">Automatisation</strong> — le plan de travail se recalibre seul selon les sessions tenues et la date d'examen.</span></div>
+        <div style="display:flex;gap:10px;align-items:baseline"><span style="flex:none;width:6px;height:6px;border-radius:50%;background:#B8862B;transform:translateY(-2px)"></span><span style="font-family:'Crimson Pro',serif;font-size:15.5px;line-height:1.45;color:#3D4C66"><strong style="color:#0E2A4E;font-weight:600">Agent IA</strong> — un coach qui lit le dossier de l'élève (erreurs, surlignages) et génère fiches et explications.</span></div>
+        <div style="display:flex;gap:10px;align-items:baseline"><span style="flex:none;width:6px;height:6px;border-radius:50%;background:#B8862B;transform:translateY(-2px)"></span><span style="font-family:'Crimson Pro',serif;font-size:15.5px;line-height:1.45;color:#3D4C66"><strong style="color:#0E2A4E;font-weight:600">Design & code</strong> — design system, front, contenu pédagogique : produits avec des outils d'IA générative, de bout en bout.</span></div>
+      </div>
+    </div>
+    <p style="margin:0;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.14em;line-height:1.7;color:#8A93A6">PARCOURS EN 8 ÉTAPES · NAVIGUE AVEC LA BARRE EN HAUT DU TÉLÉPHONE</p>
+  </aside>
+
+  <div style="position:relative;width:100%;max-width:430px;min-height:100vh;background:#FBFAF8;display:flex;flex-direction:column;box-shadow:0 0 60px rgba(14,42,78,0.15)">
+
+    <!-- ===== INTRO MOBILE ===== -->
+    <div data-demo-intro style="display:none;padding:18px 16px;background:#0E2A4E">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.2em;color:#ffcb47;margin-bottom:8px">DÉMO · PROJET PERSONNEL</div>
+      <p style="margin:0;font-family:'Crimson Pro',serif;font-size:14.5px;line-height:1.55;color:#F6F3EC">Un exemple de ce que je construis : plateforme de préparation d'examens, conçue et déployée seul. Base SQL, plan qui se recalibre automatiquement, agent IA qui lit le dossier de l'élève. <a href="index.html" style="color:#ffcb47;border:none">← Retour au site</a></p>
+    </div>
+
+    <!-- ===== BARRE DÉMO ===== -->
+    <div style="position:sticky;top:0;z-index:70;display:flex;align-items:center;gap:10px;padding:10px 14px;background:#0E2A4E">
+      <img src="demo/assets/reticle.svg" alt="" style="width:20px;height:20px">
+      <div style="flex:1;display:flex;gap:4px">
+        <sc-for list="{{ dots }}" as="d" hint-placeholder-count="8">
+          <button onClick="{{ d.go }}" aria-label="{{ d.name }}" style="flex:1;height:4px;border:none;border-radius:2px;background:{{ d.bg }};cursor:pointer;padding:0"></button>
+        </sc-for>
+      </div>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.14em;color:#ffcb47;flex:none">{{ stepNum }}/8</span>
+    </div>
+
+    <!-- ===== HEADER APP ===== -->
+    <div style="flex:none;display:flex;align-items:center;justify-content:space-between;gap:10px;height:52px;padding:0 16px;background:#fff;border-bottom:1px solid rgba(14,42,78,0.07)">
+      <span style="display:flex;align-items:center;gap:8px"><img src="demo/assets/reticle.svg" alt="" style="width:22px;height:22px"><span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.2em;color:#0E2A4E">DÉMO PRODUIT</span></span>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.16em;color:#8E6817">{{ jDay }}</span>
+        <img src="demo/assets/reticle-gold.svg" alt="" style="width:26px;height:26px">
+      </div>
+    </div>
+
+    <!-- ===== CONTENU ===== -->
+    <div style="flex:1;padding:18px 16px 250px">
+
+      <!-- ===== ÉTAPE 1 · MINI TEST ===== -->
+      <sc-if value="{{ s1 }}" hint-placeholder-val="{{ true }}">
+        <div data-screen-label="M1 Mini test" style="animation:fsFadeIn .25s ease;display:flex;flex-direction:column;gap:14px">
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.18em;color:#8E6817;margin-bottom:6px">TON MINI TEST · 30 QUESTIONS · 18 MIN · OPTIONNEL</div>
+            <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;line-height:1.05;color:#0E2A4E">Voilà où tu en es.</div>
+            <p style="margin:6px 0 0;font-family:'Crimson Pro',serif;font-size:15px;color:#55647E">Pas une note, une <em style="font-style:italic;color:#8E6817">carte</em>. Tu peux aussi sauter le test.</p>
+          </div>
+          <div style="background:#fff;border:1px solid rgba(14,42,78,0.08);border-radius:14px;padding:16px;position:relative;box-shadow:0 1px 3px rgba(14,42,78,0.05)">
+            <div style="position:absolute;top:0;left:12px;right:12px;height:3px;border-radius:0 0 3px 3px;background:#B8862B"></div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <sc-for list="{{ scanRows }}" as="r" hint-placeholder-count="10">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <span style="width:104px;flex:none;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13px;color:#0E2A4E;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.name }}</span>
+                  <span style="flex:1;height:7px;border-radius:99px;background:rgba(14,42,78,0.07);overflow:hidden;display:block"><span style="display:block;height:100%;border-radius:99px;width:{{ r.w }};background:{{ r.color }};animation:fsBarGrow .7s cubic-bezier(0.16,1,0.3,1)"></span></span>
+                  <span style="width:34px;flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:{{ r.pctColor }}">{{ r.pct }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <div style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.12em;color:#8A93A6">UNE COULEUR, C'EST UNE PREUVE · JAMAIS UNE IMPRESSION</div>
+          </div>
+          <div style="background:#12141F;border-radius:16px;padding:16px 18px">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+              <span style="width:18px;height:18px;border-radius:50%;border:1.5px solid #ffcb47;display:flex;align-items:center;justify-content:center;flex:none"><span style="width:4px;height:4px;border-radius:50%;background:#ffcb47"></span></span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.22em;color:#ffcb47">COACH</span>
+            </div>
+            <p style="margin:0;font-family:'Crimson Pro',serif;font-size:14.5px;line-height:1.55;color:#F6F3EC">Tu perds l'essentiel de tes points sur <em style="font-style:italic;color:#ffcb47">Taux fixe</em> : pas parce que c'est dur, mais sur 3 concepts précis. À 41 jours du jour J, c'est largement rattrapable.</p>
+          </div>
+          <button onClick="{{ next }}" style="padding:15px;border:none;border-radius:12px;background:#ffcb47;color:#12141f;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:16px;cursor:pointer" style-hover="background:#f0bb2e">Construire mon plan →</button>
+        </div>
+      </sc-if>
+
+      <!-- ===== ÉTAPE 2 · PROGRESSION ===== -->
+      <sc-if value="{{ s2 }}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="M2 Progression" style="animation:fsFadeIn .25s ease;display:flex;flex-direction:column;gap:14px">
+          <div>
+            <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0E2A4E">Progression</div>
+            <p style="margin:4px 0 0;font-family:'Crimson Pro',serif;font-size:15px;color:#55647E">Le jour J ne bougera pas, toi si.</p>
+          </div>
+          <div style="display:flex;gap:4px;padding:4px;background:#fff;border:1px solid rgba(14,42,78,0.12);border-radius:12px;align-self:flex-start">
+            <span style="padding:8px 18px;border-radius:9px;background:#12141F;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px">Plan</span>
+            <span style="padding:8px 18px;border-radius:9px;color:#55647E;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px">Cockpit</span>
+            <span style="padding:8px 18px;border-radius:9px;color:#55647E;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px">Coaching</span>
+          </div>
+          <div style="background:#fff;border:1px solid rgba(14,42,78,0.1);border-radius:14px;padding:16px 18px;box-shadow:0 1px 3px rgba(14,42,78,0.05)">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.18em;color:#8E6817;margin-bottom:6px">CETTE SEMAINE · S1 · PHASE 1 · DÉCOUVERTE</div>
+            <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:22px;color:#0E2A4E">2 sessions sur 4 tenues</div>
+            <div style="display:flex;align-items:center;gap:10px;margin-top:8px">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#8A93A6">65 / 130 MIN</span>
+              <span style="flex:1;height:6px;border-radius:99px;background:rgba(14,42,78,0.08);overflow:hidden;display:block"><span style="display:block;height:100%;width:50%;border-radius:99px;background:#B8862B;animation:fsBarGrow .7s cubic-bezier(0.16,1,0.3,1)"></span></span>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:14px">
+              <button style="flex:1;padding:12px 8px;border:1px solid #B8862B;border-radius:10px;background:#FBF3E1;color:#0E2A4E;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14px;cursor:pointer" style-hover="background:#F3E7C8">Recalibrer le plan</button>
+              <button style="flex:1;padding:12px 8px;border:1px solid rgba(14,42,78,0.14);border-radius:10px;background:#fff;color:#0E2A4E;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14px;cursor:pointer" style-hover="background:#F6F3EC">Modifier</button>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#F6F3EC;border:1px solid rgba(14,42,78,0.08);border-radius:10px">
+            <img src="demo/assets/reticle.svg" alt="" style="width:16px;height:16px;opacity:0.5;flex:none">
+            <span style="font-family:'Crimson Pro',serif;font-size:13.5px;line-height:1.45;color:#55647E">Le test a placé <em style="font-style:italic;color:#8E6817">Taux fixe</em> en premier. Objectif : <em style="font-style:italic;color:#8E6817">100 heures ciblées, pas 300</em>.</span>
+          </div>
+          <div>
+            <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:8px">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.18em;color:#8A93A6">TA SEMAINE</span>
+              <span style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(142,104,23,0.4);background:#F6F3EC;border-radius:999px;padding:3px 10px;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.16em;color:#8E6817">◎ PHASE 1</span>
+            </div>
+            <div style="background:#fff;border:1px solid rgba(14,42,78,0.1);border-radius:14px;overflow:hidden">
+              <sc-for list="{{ semList }}" as="sd" hint-placeholder-count="7">
+                <div style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-bottom:1px solid rgba(14,42,78,0.06);background:{{ sd.bg }}">
+                  <span style="width:46px;flex:none;text-align:center;padding:3px 0;border-radius:7px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.08em;color:{{ sd.numColor }};background:{{ sd.numBg }}">{{ sd.d }}</span>
+                  <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:5px">
+                    <sc-for list="{{ sd.ev }}" as="e" hint-placeholder-count="0">
+                      <span style="display:flex;align-items:center;gap:7px">
+                        <span style="flex:none;width:16px;height:16px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(14,42,78,0.18);border-radius:4px;background:{{ e.bg }};font-family:'JetBrains Mono',monospace;font-size:8.5px;color:#55647E">{{ e.k }}</span>
+                        <span style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13.5px;color:#0E2A4E;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ e.t }}</span>
+                      </span>
+                    </sc-for>
+                    <sc-if value="{{ sd.empty }}" hint-placeholder-val="{{ false }}">
+                      <span style="font-family:'Crimson Pro',serif;font-style:italic;font-size:13px;color:#B9C2CF">Repos</span>
+                    </sc-if>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- ===== ÉTAPE 3 · COURS + WIDGET ===== -->
+      <sc-if value="{{ s3 }}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="M3 Cours" style="animation:fsFadeIn .25s ease;display:flex;flex-direction:column;gap:14px">
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.16em;color:#8E6817;margin-bottom:4px">BIBLIOTHÈQUE · TAUX FIXE · MODULE 4</div>
+            <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:26px;letter-spacing:-0.02em;color:#0E2A4E">Duration &amp; convexité</div>
+          </div>
+          <div style="display:flex;gap:2px;border-bottom:1px solid rgba(14,42,78,0.08)">
+            <span style="padding:9px 14px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14.5px;color:#0E2A4E;border-bottom:2px solid #B8862B;margin-bottom:-1px">Leçon</span>
+            <span style="padding:9px 14px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14.5px;color:#8A93A6;margin-bottom:-1px">Quiz</span>
+            <span style="padding:9px 14px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14.5px;color:#8A93A6;margin-bottom:-1px">Maîtrise</span>
+          </div>
+          <div style="background:#fff;border:1px solid rgba(14,42,78,0.08);border-radius:14px;padding:18px;box-shadow:0 1px 3px rgba(14,42,78,0.05)">
+            <p style="margin:0 0 12px;font-family:'Crimson Pro',serif;font-size:15.5px;line-height:1.6;color:#0E2A4E">Une obligation te bloque un taux. Tout le piège est là : le marché, lui, continue de bouger.</p>
+            <p style="margin:0 0 6px;font-family:'Crimson Pro',serif;font-size:15.5px;line-height:1.6;color:#0E2A4E"><span onClick="{{ openCc }}" role="button" tabindex="0" style="cursor:pointer;border-radius:3px;padding:1px 3px;background:{{ ccSelBg }};transition:background .25s">Le prix d'une obligation bouge en sens inverse des taux : si le marché offre mieux que ton coupon, ta valeur de revente baisse.</span></p>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.14em;color:#8A93A6;margin-bottom:14px">TOUCHE UN PASSAGE : COACH L'EXPLIQUE</div>
+
+            <div style="background:#12141F;border-radius:16px;padding:16px;margin:0 -4px">
+              <div style="display:flex;align-items:center;gap:9px;margin-bottom:14px">
+                <span style="width:28px;height:28px;border-radius:8px;background:#7C6CF0;display:flex;align-items:center;justify-content:center;flex:none"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg></span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.2em;color:#F6F3EC">LE PIÈGE DU TAUX BLOQUÉ</span>
+              </div>
+              <div style="background:#1D2133;border:1px solid rgba(246,243,236,0.08);border-radius:10px;padding:10px 13px;margin-bottom:12px;font-family:'Crimson Pro',serif;font-size:14px;color:#F6F3EC">Achetée à <b>1000,00</b> · Coupon (fixe) <span style="color:#ffcb47">4 %</span></div>
+              <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:6px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.18em;color:#F6F3EC;background:rgba(246,243,236,0.08);padding:2px 7px;border-radius:5px">TAUX DU MARCHÉ</span>
+                <span style="margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:15px;color:#ffcb47">{{ mktLabel }}</span>
+              </div>
+              <input id="fsRateM" type="range" min="2" max="10" step="0.5" value="{{ mktRate }}" onChange="{{ onRate }}" style="width:100%;height:10px;border-radius:99px;background:linear-gradient(90deg,#3BAE6A,#D6C34A 45%,#E2543F);outline:none;cursor:pointer;margin:4px 0 14px">
+              <div style="background:{{ whoBg }};border:1px solid {{ whoBorder }};border-radius:10px;padding:10px 13px;margin-bottom:14px;font-family:'Crimson Pro',serif;font-size:13.5px;line-height:1.45;color:{{ whoColor }};transition:all .25s">{{ whoLine }}</div>
+              <div style="position:relative;height:46px;margin:0 2px">
+                <span style="position:absolute;left:90.9%;top:-2px;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#ffcb47;white-space:nowrap">1 000</span>
+                <span style="position:absolute;left:90.9%;top:12px;bottom:0;border-left:2px dashed rgba(255,203,71,0.6)"></span>
+                <span style="position:absolute;left:0;right:0;top:22px;height:12px;border-radius:99px;background:rgba(246,243,236,0.08)"></span>
+                <span style="position:absolute;left:0;top:22px;height:12px;border-radius:99px;background:{{ priceColor }};width:{{ priceW }};transition:width .25s,background .25s"></span>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:{{ resBg }};border:1px solid {{ resBorder }};border-radius:10px;padding:11px 14px;transition:all .25s">
+                <div style="min-width:0">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.16em;color:rgba(246,243,236,0.55);margin-bottom:3px">PRIX DE REVENTE</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.08em;font-weight:700;color:{{ resColor }}">{{ resLabel }}</div>
+                </div>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:27px;font-weight:700;color:{{ resColor }};flex:none">{{ priceLabel }}</span>
+              </div>
+              <p style="margin:12px 0 0;font-family:'Crimson Pro',serif;font-size:13.5px;line-height:1.5;color:#F6F3EC"><b>Tu as bloqué un taux</b> {{ resTail }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom sheet Coach (sélection) -->
+        <sc-if value="{{ ccOn }}" hint-placeholder-val="{{ false }}">
+          <div onClick="{{ closeCc }}" style="position:fixed;inset:0;background:rgba(14,42,78,0.35);z-index:80;animation:fsFadeIn .2s ease"></div>
+          <div data-fix style="position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:100%;max-width:430px;max-height:82vh;z-index:81;background:#FBFAF8;border-radius:18px 18px 0 0;box-shadow:0 -18px 48px rgba(14,42,78,0.3);animation:fsSheet .3s cubic-bezier(0.16,1,0.3,1);display:flex;flex-direction:column">
+            <div style="flex:none;padding:12px 16px 10px;background:#fff;border-radius:18px 18px 0 0;border-bottom:1px solid rgba(14,42,78,0.08)">
+              <div style="width:40px;height:4px;border-radius:2px;background:rgba(14,42,78,0.15);margin:0 auto 10px"></div>
+              <div style="display:flex;align-items:center;gap:10px">
+                <span style="width:34px;height:34px;border-radius:50%;background:#B8862B;display:flex;align-items:center;justify-content:center;flex:none"><span style="width:14px;height:14px;border-radius:50%;border:1.5px solid #FBF3E1;display:flex;align-items:center;justify-content:center"><span style="width:4px;height:4px;border-radius:50%;background:#FBF3E1"></span></span></span>
+                <div>
+                  <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:19px;line-height:1;color:#0E2A4E">Coach</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:7.5px;letter-spacing:0.18em;color:#8E6817;margin-top:3px">EN POSITION · CONNAÎT TON DOSSIER</div>
+                </div>
+                <button onClick="{{ closeCc }}" aria-label="Fermer" style="margin-left:auto;width:34px;height:34px;border:1px solid rgba(14,42,78,0.14);border-radius:9px;background:#fff;color:#0E2A4E;cursor:pointer;font-size:13px;line-height:1" style-hover="background:#F6F3EC">✕</button>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:8px;margin-top:10px;padding:8px 11px;background:#F6F3EC;border:1px solid rgba(184,134,43,0.35);border-radius:10px">
+                <span style="width:7px;height:7px;border-radius:50%;background:#B8862B;flex:none;margin-top:5px"></span>
+                <span style="font-family:'Crimson Pro',serif;font-style:italic;font-size:12.5px;line-height:1.4;color:#0E2A4E;flex:1">« Le prix d'une obligation bouge en sens inverse des taux… »</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:7.5px;letter-spacing:0.1em;color:#8A93A6;flex:none">TA SÉLECTION</span>
+              </div>
+            </div>
+            <div style="flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:12px">
+              <div style="background:#fff;border:1px solid rgba(14,42,78,0.08);border-radius:12px;padding:12px 14px;box-shadow:0 1px 2px rgba(14,42,78,0.04)">
+                <p style="margin:0;font-family:'Crimson Pro',serif;font-size:14.5px;line-height:1.55;color:#0E2A4E">{{ ccText }}</p>
+              </div>
+              <div style="display:flex;gap:7px;flex-wrap:wrap">
+                <button onClick="{{ ccSimple }}" style="padding:10px 14px;border:1px solid {{ ccSimpleBorder }};border-radius:999px;background:{{ ccSimpleBg }};font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13.5px;color:#0E2A4E;cursor:pointer" style-hover="border-color:#B8862B">Je comprends pas</button>
+                <button onClick="{{ ccExample }}" style="padding:10px 14px;border:1px solid {{ ccExBorder }};border-radius:999px;background:{{ ccExBg }};font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13.5px;color:#0E2A4E;cursor:pointer" style-hover="border-color:#B8862B">Un exemple</button>
+                <button onClick="{{ ccExam }}" style="padding:10px 14px;border:1px solid {{ ccExamBorder }};border-radius:999px;background:{{ ccExamBg }};font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13.5px;color:#0E2A4E;cursor:pointer" style-hover="border-color:#B8862B">À l'examen</button>
+                <button onClick="{{ ccTrap }}" style="padding:10px 14px;border:1px solid {{ ccTrapBorder }};border-radius:999px;background:{{ ccTrapBg }};font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13.5px;color:#0E2A4E;cursor:pointer" style-hover="border-color:#B8862B">Le piège</button>
+              </div>
+              <button onClick="{{ ccFcGo }}" style="align-self:flex-start;padding:11px 18px;border:1.5px solid #B8862B;border-radius:999px;background:{{ ccFcBg }};font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14px;color:#8E6817;cursor:pointer" style-hover="background:#FBF3E1">{{ ccFcLabel }}</button>
+            </div>
+            <div style="flex:none;padding:10px 16px 14px;background:#fff;border-top:1px solid rgba(14,42,78,0.08)">
+              <div style="display:flex;align-items:center;gap:10px;padding:4px 4px 4px 16px;border:1px solid rgba(14,42,78,0.16);border-radius:999px;background:#fff">
+                <span style="flex:1;font-family:'Crimson Pro',serif;font-size:14px;color:#B9C2CF">Pose ta question…</span>
+                <span style="width:36px;height:36px;border-radius:999px;background:#ffcb47;display:flex;align-items:center;justify-content:center;flex:none">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2 8h11M9 3.5 13.5 8 9 12.5" stroke="#12141f" stroke-width="2" stroke-linejoin="miter"></path></svg>
+                </span>
+              </div>
+              <div style="text-align:center;margin-top:7px;font-family:'JetBrains Mono',monospace;font-size:7px;letter-spacing:0.14em;color:#B9C2CF">COACH LIT TON DOSSIER · JAMAIS TES DONNÉES PERSONNELLES</div>
+            </div>
+          </div>
+        </sc-if>
+      </sc-if>
+
+      <!-- ===== ÉTAPE 4 · MAÎTRISE (DOSSIER) ===== -->
+      <sc-if value="{{ s4 }}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="M4 Maîtrise" style="animation:fsFadeIn .25s ease;display:flex;flex-direction:column;gap:14px">
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.16em;color:#8E6817;margin-bottom:4px">BIBLIOTHÈQUE · TAUX FIXE · MODULE 4</div>
+            <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:26px;letter-spacing:-0.02em;color:#0E2A4E">Duration &amp; convexité</div>
+          </div>
+          <div style="display:flex;gap:2px;border-bottom:1px solid rgba(14,42,78,0.08)">
+            <span style="padding:9px 14px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14.5px;color:#8A93A6;margin-bottom:-1px">Leçon</span>
+            <span style="padding:9px 14px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14.5px;color:#8A93A6;margin-bottom:-1px">Quiz</span>
+            <span style="padding:9px 14px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14.5px;color:#0E2A4E;border-bottom:2px solid #B8862B;margin-bottom:-1px">Maîtrise</span>
+          </div>
+          <p style="margin:0;font-family:'Crimson Pro',serif;font-size:14.5px;line-height:1.5;color:#55647E">Ton dossier sur ce cours : Coach n'oublie rien.</p>
+
+          <div style="background:#fff;border:1px solid rgba(14,42,78,0.08);border-radius:14px;padding:14px 16px;box-shadow:0 1px 3px rgba(14,42,78,0.05)">
+            <div style="display:flex;justify-content:space-between;margin-bottom:10px"><span style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:0.16em;color:#8A93A6">TU AS DEMANDÉ</span><span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#8E6817">3</span></div>
+            <div style="display:flex;flex-direction:column;gap:7px">
+              <sc-for list="{{ dosAsked }}" as="q" hint-placeholder-count="3">
+                <div style="padding:9px 11px;border:1px solid rgba(14,42,78,0.08);border-radius:9px">
+                  <p style="margin:0 0 3px;font-family:'Crimson Pro',serif;font-style:italic;font-size:12.5px;line-height:1.4;color:#0E2A4E">« {{ q.q }} »</p>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:7.5px;letter-spacing:0.08em;color:#8A93A6">{{ q.meta }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="background:#fff;border:1px solid rgba(14,42,78,0.08);border-radius:14px;padding:14px 16px;box-shadow:0 1px 3px rgba(14,42,78,0.05)">
+            <div style="display:flex;justify-content:space-between;margin-bottom:10px"><span style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:0.16em;color:#8A93A6">TU AS SURLIGNÉ</span><span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#8E6817">2</span></div>
+            <div style="display:flex;flex-direction:column;gap:7px">
+              <sc-for list="{{ dosMarks }}" as="m" hint-placeholder-count="2">
+                <div style="padding:9px 11px;border:1px solid rgba(14,42,78,0.08);border-radius:9px">
+                  <p style="margin:0 0 3px;font-family:'Crimson Pro',serif;font-size:12.5px;line-height:1.4;color:#0E2A4E"><span style="background:rgba(255,203,71,0.3);border-radius:2px;padding:0 2px">{{ m.t }}</span></p>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:7.5px;letter-spacing:0.08em;color:#8A93A6">{{ m.meta }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="background:#fff;border:1px solid rgba(14,42,78,0.08);border-radius:14px;padding:14px 16px;box-shadow:0 1px 3px rgba(14,42,78,0.05)">
+            <div style="display:flex;justify-content:space-between;margin-bottom:10px"><span style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:0.16em;color:#8A93A6">TU AS RATÉ</span><span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#B93A28">4</span></div>
+            <div style="display:flex;flex-direction:column;gap:7px">
+              <sc-for list="{{ dosFails }}" as="f" hint-placeholder-count="3">
+                <div style="padding:9px 11px;border:1px solid rgba(14,42,78,0.08);border-radius:9px">
+                  <p style="margin:0 0 3px;font-family:'Crimson Pro',serif;font-size:12.5px;line-height:1.4;color:#0E2A4E">{{ f.t }}</p>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:7.5px;letter-spacing:0.08em;color:#B93A28">{{ f.meta }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="background:#12141F;border-radius:16px;padding:16px 18px">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+              <span style="width:18px;height:18px;border-radius:50%;border:1.5px solid #ffcb47;display:flex;align-items:center;justify-content:center;flex:none"><span style="width:4px;height:4px;border-radius:50%;background:#ffcb47"></span></span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:0.2em;color:#ffcb47">COACH · FICHES DEPUIS TON DOSSIER</span>
+            </div>
+            <p style="margin:0 0 12px;font-family:'Crimson Pro',serif;font-size:14px;line-height:1.55;color:#F6F3EC">Je peux te condenser tout ça en une fiche : tes surlignages, ta question sur la convexité et tes 4 erreurs. Une page, <em style="font-style:italic;color:#ffcb47">rien que ton Taux fixe à toi</em>.</p>
+            <button onClick="{{ dosGenGo }}" style="width:100%;padding:13px;border:none;border-radius:10px;background:{{ dosBtnBg }};color:#12141f;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14.5px;cursor:pointer" style-hover="background:#f0bb2e">{{ dosBtnLabel }}</button>
+          </div>
+          <sc-if value="{{ dosGen }}" hint-placeholder-val="{{ false }}">
+            <div style="background:#fff;border:1px solid rgba(184,134,43,0.45);border-radius:14px;padding:14px 16px;box-shadow:0 2px 8px rgba(184,134,43,0.08);animation:fsRise .35s cubic-bezier(0.16,1,0.3,1)">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.14em;color:#8E6817;margin-bottom:6px">FICHE CRÉÉE À L'INSTANT</div>
+              <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:17px;color:#0E2A4E;margin-bottom:4px">Ton Taux fixe, en une page</div>
+              <p style="margin:0 0 10px;font-family:'Crimson Pro',serif;font-size:13px;line-height:1.45;color:#55647E">2 surlignages · 1 explication Coach · 4 erreurs corrigées. 3 flashcards ajoutées.</p>
+              <button style="width:100%;padding:11px;border:1px solid rgba(14,42,78,0.16);border-radius:9px;background:#fff;color:#0E2A4E;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px;cursor:pointer" style-hover="background:#F6F3EC">Ouvrir la fiche</button>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <!-- ===== ÉTAPE 5 · MOCK ===== -->
+      <sc-if value="{{ s5 }}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="M5 Mock" style="animation:fsFadeIn .25s ease;display:flex;flex-direction:column;gap:14px">
+          <div>
+            <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0E2A4E">Pratique</div>
+            <p style="margin:4px 0 0;font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:0.14em;color:#8A93A6">MOCK 1 · 180 QUESTIONS · PASSÉ À J−27 : TÔT, ET C'EST VOULU</p>
+          </div>
+          <div style="background:#fff;border:1px solid rgba(14,42,78,0.08);border-radius:14px;padding:20px;text-align:center;position:relative;box-shadow:0 1px 3px rgba(14,42,78,0.05)">
+            <div style="position:absolute;top:0;left:12px;right:12px;height:3px;border-radius:0 0 3px 3px;background:#B93A28"></div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.2em;color:#8A93A6">SCORE GLOBAL</div>
+            <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:56px;line-height:1;letter-spacing:-0.03em;color:#B93A28;margin:8px 0 6px">38%</div>
+            <div style="display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:999px;background:#F6E5E3;border:1px solid #D99389;font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:0.12em;color:#9B3326"><span style="width:6px;height:6px;border-radius:50%;background:#B93A28"></span>SOUS LE SEUIL · ON CONTINUE</div>
+            <div style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:0.08em;color:#8A93A6">GROUPE : 62% · TOI : 38% · 1M44 / QUESTION</div>
+          </div>
+          <div style="background:#12141F;border-radius:16px;padding:16px 18px">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+              <span style="width:18px;height:18px;border-radius:50%;border:1.5px solid #ffcb47;display:flex;align-items:center;justify-content:center;flex:none"><span style="width:4px;height:4px;border-radius:50%;background:#ffcb47"></span></span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:0.2em;color:#ffcb47">COACH · DÉBRIEF</span>
+            </div>
+            <p style="margin:0 0 12px;font-family:'Crimson Pro',serif;font-size:14.5px;line-height:1.55;color:#F6F3EC">38%, et c'est exactement pour ça qu'on l'a passé tôt : ici, <em style="font-style:italic;color:#ffcb47">se tromper fait partie du plan</em>. Tu perds 31 points sur 3 zones seulement : Éthique, Portefeuille, États financiers. Taux fixe tient à 90% : le cours a payé. J'ai mis tes 14 pires questions dans une série : 25 minutes.</p>
+            <button style="width:100%;padding:13px;border:none;border-radius:10px;background:#ffcb47;color:#12141f;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14.5px;cursor:pointer;margin-bottom:8px" style-hover="background:#f0bb2e">Refaire mes 14 pires questions · 25 min</button>
+            <button style="width:100%;padding:12px;border:1px solid rgba(246,243,236,0.3);border-radius:10px;background:transparent;color:#F6F3EC;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px;cursor:pointer" style-hover="background:rgba(246,243,236,0.08)">Créer mon cours perso · Éthique</button>
+          </div>
+          <div style="background:#fff;border:1px solid rgba(14,42,78,0.08);border-radius:14px;padding:16px;box-shadow:0 1px 3px rgba(14,42,78,0.05)">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:0.16em;color:#8A93A6;margin-bottom:12px">PERFORMANCE PAR MATIÈRE</div>
+            <div style="display:flex;flex-direction:column;gap:9px">
+              <sc-for list="{{ mockRows }}" as="tr" hint-placeholder-count="10">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <span style="width:96px;flex:none;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:12.5px;color:#0E2A4E;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ tr.name }}</span>
+                  <div style="flex:1;height:6px;border-radius:3px;background:rgba(18,20,31,0.06);overflow:hidden"><div style="width:{{ tr.w }};height:100%;border-radius:3px;background:{{ tr.color }};animation:fsBarGrow .7s cubic-bezier(0.16,1,0.3,1)"></div></div>
+                  <span style="width:34px;flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:9.5px;color:{{ tr.color }}">{{ tr.score }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <div style="margin-top:12px;font-family:'Crimson Pro',serif;font-size:13.5px;color:#8A93A6">+ 11 concepts confirmés sur ta carte. <a href="#" onClick="{{ goHub }}">Voir la carte →</a></div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- ===== ÉTAPE 6 · HUB · CARTE ===== -->
+      <sc-if value="{{ s6 }}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="M6 Carte" style="animation:fsFadeIn .25s ease;display:flex;flex-direction:column;gap:12px">
+          <div>
+            <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0E2A4E">Carte de maîtrise</div>
+            <p style="margin:4px 0 0;font-family:'Crimson Pro',serif;font-size:14px;color:#55647E"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#1F7A4D">↗</span> 9 concepts ont bougé depuis ta dernière visite.</p>
+          </div>
+          <button onClick="{{ openCoach }}" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:13px;border:1px solid #B8862B;border-radius:12px;background:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14.5px;color:#0E2A4E;cursor:pointer;animation:fsLockGlow 2.4s ease-out 1s 1" style-hover="background:#FBF3E1"><span style="width:8px;height:8px;border-radius:50%;background:#B8862B"></span>Coaching ciblé · 3 points faibles prouvés</button>
+          <div class="no-scrollbar" style="display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin:0 -16px;padding-left:16px;padding-right:16px">
+            <sc-for list="{{ filterChips }}" as="fc" hint-placeholder-count="8">
+              <span style="flex:none;display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid {{ fc.border }};border-radius:999px;background:{{ fc.bg }};font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:0.12em;color:{{ fc.color }};white-space:nowrap">
+                <sc-if value="{{ fc.hasDot }}" hint-placeholder-val="{{ false }}"><span style="width:6px;height:6px;border-radius:50%;background:{{ fc.dot }}"></span></sc-if>
+                {{ fc.label }}
+              </span>
+            </sc-for>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.12em;color:#8A93A6">TOUCHE UNE CASE POUR OUVRIR SON DOSSIER</div>
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <sc-for list="{{ groups }}" as="g" hint-placeholder-count="2">
+              <div>
+                <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:8px">
+                  <span style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:17px;color:#0E2A4E">{{ g.name }}</span>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8A93A6">{{ g.moveFrom }}</span>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:{{ g.moveColor }}">{{ g.moveGlyph }} {{ g.pctLabel }}</span>
+                  <span style="margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:0.08em;color:#8A93A6">{{ g.countLabel }}</span>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                  <sc-for list="{{ g.concepts }}" as="c" hint-placeholder-count="6">
+                    <button onClick="{{ c.onOpen }}" style="position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:7px;min-height:76px;padding:11px 12px;text-align:left;background:{{ c.bg }};border:1.5px {{ c.borderStyle }} {{ c.border }};border-radius:12px;cursor:pointer" style-hover="box-shadow:0 5px 14px rgba(14,42,78,0.13)">
+                      <sc-if value="{{ c.hasMove }}" hint-placeholder-val="{{ false }}">
+                        <span style="position:absolute;top:5px;right:7px;font-family:'JetBrains Mono',monospace;font-size:10px;color:{{ c.moveColor }}">{{ c.moveGlyph }}</span>
+                      </sc-if>
+                      <span style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13.5px;line-height:1.2;color:#0E2A4E;padding-right:10px">{{ c.name }}</span>
+                      <span style="display:inline-flex;align-items:center;gap:5px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.04em;color:{{ c.metaColor }}">
+                        <sc-if value="{{ c.hasDot }}" hint-placeholder-val="{{ false }}"><span style="width:7px;height:7px;border-radius:50%;background:{{ c.dot }}"></span></sc-if>
+                        {{ c.metaText }}
+                      </span>
+                    </button>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <!-- Bottom sheet concept -->
+        <sc-if value="{{ panelOpen }}" hint-placeholder-val="{{ false }}">
+          <div onClick="{{ closePanel }}" style="position:fixed;inset:0;background:rgba(14,42,78,0.35);z-index:80;animation:fsFadeIn .2s ease"></div>
+          <div data-fix style="position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:100%;max-width:430px;max-height:84vh;z-index:81;background:#fff;border-radius:18px 18px 0 0;box-shadow:0 -18px 48px rgba(14,42,78,0.3);animation:fsSheet .3s cubic-bezier(0.16,1,0.3,1);display:flex;flex-direction:column">
+            <div style="flex:none;padding:12px 18px 14px;border-bottom:1px solid rgba(14,42,78,0.08)">
+              <div style="width:40px;height:4px;border-radius:2px;background:rgba(14,42,78,0.15);margin:0 auto 10px"></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.2em;color:#8A93A6">{{ pMat }}</span>
+                <button onClick="{{ closePanel }}" aria-label="Fermer" style="width:32px;height:32px;border:1px solid rgba(14,42,78,0.16);border-radius:8px;background:#fff;color:#0E2A4E;font-size:13px;cursor:pointer;line-height:1" style-hover="background:#F6F3EC">✕</button>
+              </div>
+              <h2 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:22px;line-height:1.08;letter-spacing:-0.02em;margin:8px 0;color:#0E2A4E">{{ pName }}</h2>
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                <span style="display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:{{ pChipBg }};border:1px solid {{ pChipBorder }};font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:{{ pChipText }}">
+                  <span style="width:7px;height:7px;border-radius:50%;background:{{ pChipDot }}"></span>
+                  {{ pLevel }}
+                </span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.06em;color:#8A93A6">{{ pEvidence }}</span>
+              </div>
+            </div>
+            <div style="flex:1;overflow-y:auto;padding:14px 18px 20px">
+              <sc-if value="{{ pHasErr }}" hint-placeholder-val="{{ true }}">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.18em;color:#8A93A6;margin-bottom:8px">TES ERREURS SUR CE CONCEPT</div>
+                <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
+                  <sc-for list="{{ pErrors }}" as="err" hint-placeholder-count="2">
+                    <div style="padding:11px 13px;border:1px solid rgba(14,42,78,0.08);border-radius:10px">
+                      <div style="display:flex;justify-content:space-between;gap:10px;margin-bottom:5px">
+                        <span style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:0.12em;padding:2px 6px;border-radius:4px;background:#F6F3EC;color:#8E6817">{{ err.src }}</span>
+                        <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#8A93A6;flex:none">{{ err.date }}</span>
+                      </div>
+                      <p style="margin:0 0 4px;font-family:'Crimson Pro',serif;font-size:13.5px;line-height:1.4;color:#0E2A4E">{{ err.q }}</p>
+                      <p style="margin:0;font-family:'Crimson Pro',serif;font-size:12.5px;line-height:1.4;color:#B93A28">{{ err.rep }}</p>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ pNoErr }}" hint-placeholder-val="{{ false }}">
+                <div style="padding:12px 14px;border:1px dashed rgba(14,42,78,0.18);border-radius:10px;margin-bottom:14px">
+                  <p style="margin:0;font-family:'Crimson Pro',serif;font-style:italic;font-size:13.5px;line-height:1.5;color:#8A93A6">{{ pNoErrText }}</p>
+                </div>
+              </sc-if>
+              <button style="width:100%;padding:14px;border:none;border-radius:10px;background:#ffcb47;color:#12141f;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:15px;cursor:pointer;margin-bottom:8px" style-hover="background:#f0bb2e">{{ pRedoLabel }}</button>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 13px;border:1px solid rgba(14,42,78,0.08);border-radius:10px;margin-bottom:8px">
+                <div>
+                  <div style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px;color:#0E2A4E">Cours personnalisé</div>
+                  <div style="font-family:'Crimson Pro',serif;font-size:12.5px;color:#8A93A6">{{ pGenSub }}</div>
+                </div>
+                <button onClick="{{ genFiche }}" style="flex:none;padding:9px 13px;border:1px solid {{ genBorder }};border-radius:8px;background:{{ genBg }};color:{{ genColor }};font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13px;cursor:pointer" style-hover="background:#F6F3EC">{{ genLabel }}</button>
+              </div>
+              <button onClick="{{ openChat }}" style="display:flex;align-items:center;gap:10px;width:100%;padding:13px 14px;border:1px solid rgba(14,42,78,0.08);border-radius:10px;background:#fff;cursor:pointer;text-align:left" style-hover="background:#F6F3EC">
+                <img src="demo/assets/coach.svg" alt="" style="width:24px;height:24px;flex:none">
+                <span style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14.5px;color:#0E2A4E">En parler au Coach</span>
+                <span style="margin-left:auto;color:#8A93A6">→</span>
+              </button>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- Overlay chat Coach -->
+        <sc-if value="{{ chatOn }}" hint-placeholder-val="{{ false }}">
+          <div data-fix style="position:fixed;left:50%;transform:translateX(-50%);top:0;bottom:0;width:100%;max-width:430px;z-index:85;background:#FBFAF8;animation:fsSheet .28s cubic-bezier(0.16,1,0.3,1);display:flex;flex-direction:column">
+            <div style="flex:none;padding:14px 16px 12px;background:#fff;border-bottom:1px solid rgba(14,42,78,0.08)">
+              <div style="display:flex;align-items:center;gap:10px">
+                <button onClick="{{ closeChat }}" aria-label="Retour" style="width:34px;height:34px;border:1px solid rgba(14,42,78,0.14);border-radius:9px;background:#fff;color:#0E2A4E;cursor:pointer;font-size:14px;line-height:1" style-hover="background:#F6F3EC">←</button>
+                <span style="width:34px;height:34px;border-radius:50%;background:#B8862B;display:flex;align-items:center;justify-content:center;flex:none"><span style="width:14px;height:14px;border-radius:50%;border:1.5px solid #FBF3E1;display:flex;align-items:center;justify-content:center"><span style="width:4px;height:4px;border-radius:50%;background:#FBF3E1"></span></span></span>
+                <div>
+                  <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:19px;line-height:1;color:#0E2A4E">Coach</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:7.5px;letter-spacing:0.18em;color:#8E6817;margin-top:3px">EN POSITION · CONNAÎT TON DOSSIER</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;margin-top:10px;padding:8px 11px;background:#F6F3EC;border:1px solid rgba(14,42,78,0.08);border-radius:10px">
+                <span style="width:7px;height:7px;border-radius:50%;background:{{ chatDot }};flex:none"></span>
+                <span style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13px;color:#0E2A4E;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ chatName }}</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:7.5px;letter-spacing:0.1em;color:#8A93A6;flex:none">{{ chatMeta }}</span>
+              </div>
+            </div>
+            <div style="flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:12px">
+              <div style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.18em;color:#8A93A6">AUJOURD'HUI · 20:54</div>
+              <div style="display:flex;gap:9px">
+                <span style="width:24px;height:24px;border-radius:50%;background:#B8862B;display:flex;align-items:center;justify-content:center;flex:none;margin-top:2px"><span style="width:4px;height:4px;border-radius:50%;background:#FBF3E1"></span></span>
+                <div style="background:#fff;border:1px solid rgba(14,42,78,0.08);border-radius:12px 12px 12px 4px;padding:12px 14px;box-shadow:0 1px 2px rgba(14,42,78,0.04)">
+                  <p style="margin:0;font-family:'Crimson Pro',serif;font-size:14px;line-height:1.55;color:#0E2A4E">{{ chatB1 }}</p>
+                  <sc-if value="{{ chatHasB2 }}" hint-placeholder-val="{{ false }}">
+                    <p style="margin:9px 0 0;font-family:'Crimson Pro',serif;font-size:14px;line-height:1.55;color:#0E2A4E">{{ chatB2 }}</p>
+                  </sc-if>
+                </div>
+              </div>
+              <sc-if value="{{ chatHasRule }}" hint-placeholder-val="{{ false }}">
+                <div style="margin-left:33px;padding:12px 14px;background:#FDF8EC;border:1px solid rgba(184,134,43,0.45);border-radius:12px">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.18em;color:#8E6817;margin-bottom:6px">LA RÈGLE EN UNE LIGNE</div>
+                  <p style="margin:0;font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.65;color:#0E2A4E">{{ chatRule }}</p>
+                </div>
+              </sc-if>
+              <sc-if value="{{ chatCoach }}" hint-placeholder-val="{{ false }}">
+                <div style="margin-left:33px;padding:12px 14px;background:#FDF8EC;border:1px solid rgba(184,134,43,0.45);border-radius:12px">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.18em;color:#8E6817;margin-bottom:8px">TON COACHING · 1 HEURE · TES POINTS FAIBLES</div>
+                  <div style="display:flex;flex-direction:column;gap:7px">
+                    <div style="display:flex;justify-content:space-between;gap:10px;font-family:'Crimson Pro',serif;font-size:13px;color:#0E2A4E"><span style="display:flex;gap:7px"><span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#B8862B">01</span>III(B) Fair dealing</span><span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:#8A93A6">20 MIN</span></div>
+                    <div style="display:flex;justify-content:space-between;gap:10px;font-family:'Crimson Pro',serif;font-size:13px;color:#0E2A4E"><span style="display:flex;gap:7px"><span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#B8862B">02</span>IPS : objectifs et contraintes</span><span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:#8A93A6">20 MIN</span></div>
+                    <div style="display:flex;justify-content:space-between;gap:10px;font-family:'Crimson Pro',serif;font-size:13px;color:#0E2A4E"><span style="display:flex;gap:7px"><span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#B8862B">03</span>Impairment</span><span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:#8A93A6">20 MIN</span></div>
+                  </div>
+                  <button style="width:100%;margin-top:10px;padding:12px;border:none;border-radius:9px;background:#ffcb47;color:#12141f;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13.5px;cursor:pointer" style-hover="background:#f0bb2e">Réserver mon heure · demain 18h</button>
+                  <div style="text-align:center;margin-top:7px;font-family:'JetBrains Mono',monospace;font-size:7px;letter-spacing:0.12em;color:#8A93A6">1 HEURE · 1 CRÉDIT SUPPLÉMENTAIRE · INCLUS DÈS ULTIMATE</div>
+                </div>
+              </sc-if>
+            </div>
+            <div style="flex:none;padding:10px 16px 14px;background:#fff;border-top:1px solid rgba(14,42,78,0.08)">
+              <div style="display:flex;align-items:center;gap:10px;padding:4px 4px 4px 16px;border:1px solid rgba(14,42,78,0.16);border-radius:999px;background:#fff">
+                <span style="flex:1;font-family:'Crimson Pro',serif;font-size:14px;color:#B9C2CF">Pose ta question…</span>
+                <span style="width:36px;height:36px;border-radius:999px;background:#ffcb47;display:flex;align-items:center;justify-content:center;flex:none">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2 8h11M9 3.5 13.5 8 9 12.5" stroke="#12141f" stroke-width="2" stroke-linejoin="miter"></path></svg>
+                </span>
+              </div>
+              <div style="text-align:center;margin-top:7px;font-family:'JetBrains Mono',monospace;font-size:7px;letter-spacing:0.14em;color:#B9C2CF">COACH LIT TON DOSSIER · JAMAIS TES DONNÉES PERSONNELLES</div>
+            </div>
+          </div>
+        </sc-if>
+      </sc-if>
+
+      <!-- ===== ÉTAPE 7 · DUEL ===== -->
+      <sc-if value="{{ s7 }}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="M7 Duel" style="animation:fsFadeIn .25s ease;display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;align-items:baseline;gap:10px">
+            <div>
+              <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0E2A4E">Bonus</div>
+              <p style="margin:4px 0 0;font-family:'Crimson Pro',serif;font-size:14px;color:#55647E">Le terrain : vos propres erreurs.</p>
+            </div>
+            <span style="margin-left:auto;display:inline-flex;align-items:center;gap:8px">
+              <span style="display:inline-flex;gap:2px">
+                <sc-for list="{{ streakTicks }}" as="tk" hint-placeholder-count="7">
+                  <span style="width:6px;height:10px;border-radius:2px;background:{{ tk.bg }}"></span>
+                </sc-for>
+              </span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.14em;color:#8E6817">{{ streakLabel }}</span>
+            </span>
+          </div>
+
+          <sc-if value="{{ duelQ }}" hint-placeholder-val="{{ true }}">
+            <div style="position:relative;background:#fff;border:1px solid rgba(14,42,78,0.08);border-radius:14px;padding:18px 16px;box-shadow:0 1px 3px rgba(14,42,78,0.05)">
+              <div style="position:absolute;top:0;left:12px;right:12px;height:3px;border-radius:0 0 3px 3px;background:#B8862B"></div>
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:0.18em;color:#8E6817">◎ DUEL · TES ERREURS CONTRE LES SIENNES</span>
+                <span style="margin-left:auto;padding:3px 9px;border:1px solid rgba(14,42,78,0.16);border-radius:999px;font-family:'JetBrains Mono',monospace;font-size:9px;color:#0E2A4E">⏱ 0:42</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:#F6F3EC;border:1px solid rgba(14,42,78,0.08);border-radius:12px;margin-bottom:12px">
+                <img src="demo/assets/coach.svg" alt="" style="width:30px;height:30px;flex:none">
+                <span style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14px;color:#0E2A4E">Toi</span>
+                <div style="flex:1;text-align:center">
+                  <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:26px;line-height:1;letter-spacing:0.04em;color:#0E2A4E">2 – 2</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:7.5px;letter-spacing:0.14em;color:#8E6817;margin-top:2px">Q 5/5 · LA BELLE</div>
+                </div>
+                <span style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14px;color:#0E2A4E">@Karim_T</span>
+                <img src="demo/assets/reticle-thin.svg" alt="" style="width:30px;height:30px;flex:none">
+              </div>
+              <div style="display:inline-flex;align-items:center;padding:4px 10px;background:#FBF3E1;border:1px solid #B8862B;border-radius:999px;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.12em;color:#8E6817;margin-bottom:12px">TIRÉE DE TES ERREURS · LEÇON DURATION · HIER</div>
+              <p style="margin:0 0 12px;font-family:'Crimson Pro',serif;font-size:15.5px;line-height:1.5;color:#0E2A4E">Duration modifiée de 8. Les taux montent de 50 pb. La variation de prix est <em style="font-style:italic">la plus proche de</em> :</p>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <button onClick="{{ duelPickA }}" style="display:flex;align-items:center;gap:12px;padding:14px;border:1px solid rgba(14,42,78,0.14);border-radius:10px;background:#fff;cursor:pointer;text-align:left" style-hover="border-color:#B8862B;background:#F6F3EC">
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#8E6817;flex:none">A</span>
+                  <span style="font-family:'Crimson Pro',serif;font-size:15.5px;color:#0E2A4E">−4,0 %</span>
+                </button>
+                <button onClick="{{ duelPickB }}" style="display:flex;align-items:center;gap:12px;padding:14px;border:1px solid rgba(14,42,78,0.14);border-radius:10px;background:#fff;cursor:pointer;text-align:left" style-hover="border-color:#B8862B;background:#F6F3EC">
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#8E6817;flex:none">B</span>
+                  <span style="font-family:'Crimson Pro',serif;font-size:15.5px;color:#0E2A4E">+4,0 %</span>
+                </button>
+                <button onClick="{{ duelPickC }}" style="display:flex;align-items:center;gap:12px;padding:14px;border:1px solid rgba(14,42,78,0.14);border-radius:10px;background:#fff;cursor:pointer;text-align:left" style-hover="border-color:#B8862B;background:#F6F3EC">
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#8E6817;flex:none">C</span>
+                  <span style="font-family:'Crimson Pro',serif;font-size:15.5px;color:#0E2A4E">−8,0 %</span>
+                </button>
+              </div>
+              <p style="margin:12px 0 0;font-family:'Crimson Pro',serif;font-style:italic;font-size:13px;color:#8A93A6">Karim a déjà répondu, il y a 20 secondes.</p>
+            </div>
+          </sc-if>
+          <sc-if value="{{ duelWon }}" hint-placeholder-val="{{ false }}">
+            <div style="position:relative;background:#fff;border:1px solid rgba(184,134,43,0.5);border-radius:14px;box-shadow:0 8px 28px rgba(184,134,43,0.14);padding:20px 18px;animation:fsRise .35s ease;overflow:hidden">
+              <div style="position:absolute;top:0;left:0;right:0;height:4px;background:#B8862B"></div>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:0.18em;color:#8E6817">◎ DUEL · VERDICT</span>
+              <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:32px;letter-spacing:-0.02em;line-height:1.05;color:#0E2A4E;margin:12px 0 8px">3 – 2. <span style="color:#B8862B">Duration vengée.</span></div>
+              <p style="margin:0 0 10px;font-family:'Crimson Pro',serif;font-size:14.5px;line-height:1.5;color:#55647E">La question qui t'a coûté un point hier vient de t'en rapporter un. Elle file dans le dossier de Karim : la revanche est à lui.</p>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.12em;color:#8E6817;margin-bottom:14px">+60 XP · SÉRIE DE 7 JOURS</div>
+              <button onClick="{{ duelReset }}" style="width:100%;padding:14px;border:none;border-radius:10px;background:#ffcb47;color:#12141f;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:15px;cursor:pointer" style-hover="background:#f0bb2e">Revanche · mêmes erreurs</button>
+            </div>
+          </sc-if>
+          <sc-if value="{{ duelLost }}" hint-placeholder-val="{{ false }}">
+            <div style="position:relative;background:#fff;border:1px solid rgba(14,42,78,0.08);border-radius:14px;padding:20px 18px;animation:fsRise .35s ease;box-shadow:0 1px 3px rgba(14,42,78,0.05)">
+              <div style="position:absolute;top:0;left:12px;right:12px;height:3px;border-radius:0 0 3px 3px;background:#B8862B"></div>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:0.18em;color:#8E6817">◎ DUEL · VERDICT</span>
+              <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;line-height:1.08;color:#0E2A4E;margin:12px 0 10px">2 – 3. Karim l'emporte, <span style="color:#B8862B">cette fois.</span></div>
+              <div style="padding:12px 14px;background:#F6F3EC;border:1px solid rgba(14,42,78,0.08);border-radius:10px;margin-bottom:12px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:0.16em;color:#8A93A6">LA CORRECTION</span>
+                <p style="margin:6px 0 0;font-family:'Crimson Pro',serif;font-size:14px;line-height:1.5;color:#0E2A4E">Taux en hausse → prix en baisse : <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">−8 × 0,005 = <span style="color:#8E6817">−4,0 %</span></span></p>
+              </div>
+              <button onClick="{{ duelReset }}" style="width:100%;padding:14px;border:1px solid #B8862B;border-radius:10px;background:#fff;color:#8E6817;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:15px;cursor:pointer;margin-bottom:8px" style-hover="background:#FBF3E1">Revanche · maintenant</button>
+              <p style="margin:0;font-family:'Crimson Pro',serif;font-size:13px;color:#8A93A6;text-align:center">Cette question retourne dans ta pile : demain, elle ne te battra plus.</p>
+            </div>
+          </sc-if>
+
+          <div style="background:#fff;border:1px solid rgba(14,42,78,0.08);border-radius:14px;padding:14px 16px;box-shadow:0 1px 3px rgba(14,42,78,0.05)">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:0.16em;color:#8A93A6">LIGUE ANALYSTE · SEMAINE 3</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:7.5px;color:#8A93A6">TOP 5 = PIÈCE DE LA COLLECTION</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div style="display:flex;align-items:center;gap:10px;padding:9px 11px;border:1px solid rgba(14,42,78,0.08);border-radius:9px">
+                <span style="width:18px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#8A93A6">4</span>
+                <span style="flex:1;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13.5px;color:#0E2A4E">@Sofia_M</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8A93A6">1 240 XP</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;padding:9px 11px;border:1.5px solid #B8862B;border-radius:9px;background:#FBF3E1">
+                <span style="width:18px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#8E6817">5</span>
+                <span style="flex:1;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13.5px;color:#0E2A4E">Toi</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#1F7A4D">↗ 1 180 XP</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;padding:9px 11px;border:1px solid rgba(14,42,78,0.08);border-radius:9px">
+                <span style="width:18px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#8A93A6">6</span>
+                <span style="flex:1;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13.5px;color:#0E2A4E">@Karim_T</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8A93A6">1 165 XP</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- ===== ÉTAPE 8 · COCKPIT ===== -->
+      <sc-if value="{{ s8 }}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="M8 Cockpit" style="animation:fsFadeIn .25s ease;display:flex;flex-direction:column;gap:14px">
+          <div>
+            <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0E2A4E">Progression</div>
+            <p style="margin:4px 0 0;font-family:'Crimson Pro',serif;font-size:14.5px;color:#55647E">Le Cockpit : tu sais où tu vas.</p>
+          </div>
+          <div style="display:flex;gap:4px;padding:4px;background:#fff;border:1px solid rgba(14,42,78,0.12);border-radius:12px;align-self:flex-start">
+            <span style="padding:8px 18px;border-radius:9px;color:#55647E;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px">Plan</span>
+            <span style="padding:8px 18px;border-radius:9px;background:#12141F;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px">Cockpit</span>
+            <span style="padding:8px 18px;border-radius:9px;color:#55647E;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px">Coaching</span>
+          </div>
+          <div style="background:#fff;border:1px solid rgba(14,42,78,0.1);border-radius:14px;padding:18px;box-shadow:0 1px 3px rgba(14,42,78,0.05);position:relative">
+            <div style="position:absolute;top:0;left:12px;right:12px;height:3px;border-radius:0 0 3px 3px;background:#B8862B"></div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:0.18em;color:#8A93A6">SCORE DE PRÉDICTION · JOUR J</div>
+            <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">
+              <span style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:60px;line-height:1;letter-spacing:-0.03em;color:#1F7A4D">88%</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#1F7A4D">↗ +4 CETTE SEMAINE · ±4 PTS</span>
+            </div>
+            <p style="margin:6px 0 12px;font-family:'Crimson Pro',serif;font-size:13.5px;line-height:1.5;color:#55647E">Calibré sur <em style="font-style:italic;color:#8E6817">tes 1 240 réponses</em>. Recalculé chaque soir.</p>
+            <svg viewBox="0 0 400 120" style="width:100%;height:auto;display:block">
+              <line x1="20" y1="100" x2="380" y2="100" stroke="rgba(14,42,78,0.1)" stroke-width="1"></line>
+              <line x1="20" y1="40" x2="380" y2="40" stroke="rgba(14,42,78,0.07)" stroke-width="1" stroke-dasharray="3 4"></line>
+              <text x="20" y="34" font-family="JetBrains Mono,monospace" font-size="9" fill="#8A93A6">SEUIL ESTIMÉ</text>
+              <polyline points="30,66 160,54 260,41" fill="none" stroke="#0E2A4E" stroke-width="2"></polyline>
+              <line x1="260" y1="41" x2="370" y2="24" stroke="#B8862B" stroke-width="2" stroke-dasharray="5 4"></line>
+              <circle cx="30" cy="66" r="4" fill="#fff" stroke="#0E2A4E" stroke-width="2"></circle>
+              <circle cx="160" cy="54" r="4" fill="#fff" stroke="#0E2A4E" stroke-width="2"></circle>
+              <circle cx="260" cy="41" r="4" fill="#fff" stroke="#0E2A4E" stroke-width="2"></circle>
+              <circle cx="370" cy="24" r="6" fill="#ffcb47" stroke="#B8862B" stroke-width="2"></circle>
+              <text x="30" y="84" font-family="JetBrains Mono,monospace" font-size="9.5" fill="#8A93A6" text-anchor="middle">J−41</text>
+              <text x="160" y="72" font-family="JetBrains Mono,monospace" font-size="9.5" fill="#8A93A6" text-anchor="middle">J−27</text>
+              <text x="260" y="60" font-family="JetBrains Mono,monospace" font-size="9.5" fill="#8A93A6" text-anchor="middle">J−20</text>
+              <text x="366" y="46" font-family="JetBrains Mono,monospace" font-size="9.5" fill="#8E6817" text-anchor="end">JOUR J · 88%</text>
+            </svg>
+          </div>
+          <div style="background:#fff;border:1px solid rgba(14,42,78,0.1);border-radius:14px;padding:16px 18px;box-shadow:0 1px 3px rgba(14,42,78,0.05)">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:0.18em;color:#8A93A6;margin-bottom:12px">TEMPS INVESTI · DROIT AU BUT</div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+                  <span style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14.5px;color:#0E2A4E">Toi, avec la plateforme</span>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8E6817">54 H CIBLÉES</span>
+                </div>
+                <div style="height:9px;border-radius:99px;background:rgba(14,42,78,0.07);overflow:hidden"><span style="display:block;height:100%;width:22%;border-radius:99px;background:#B8862B;animation:fsBarGrow .8s cubic-bezier(0.16,1,0.3,1)"></span></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+                  <span style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px;color:#8A93A6">Prépa classique</span>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8A93A6">≈ 300 H</span>
+                </div>
+                <div style="height:9px;border-radius:99px;background:rgba(14,42,78,0.07);overflow:hidden"><span style="display:block;height:100%;width:100%;border-radius:99px;background:rgba(14,42,78,0.18)"></span></div>
+              </div>
+            </div>
+            <p style="margin:12px 0 0;font-family:'Crimson Pro',serif;font-size:13.5px;line-height:1.5;color:#55647E">Chaque heure vise un point faible <em style="font-style:italic;color:#8E6817">prouvé par tes réponses</em>.</p>
+          </div>
+          <div style="background:#12141F;border-radius:16px;padding:16px 18px">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+              <span style="width:18px;height:18px;border-radius:50%;border:1.5px solid #ffcb47;display:flex;align-items:center;justify-content:center;flex:none"><span style="width:4px;height:4px;border-radius:50%;background:#ffcb47"></span></span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.22em;color:#ffcb47">COACH</span>
+            </div>
+            <p style="margin:0;font-family:'Crimson Pro',serif;font-size:14.5px;line-height:1.55;color:#F6F3EC">88 %, et ce chiffre ne me croit pas sur parole : il sort de <em style="font-style:italic;color:#ffcb47">tes</em> 1 240 réponses. Encore 20 jours à ce rythme et le jour J est une formalité.</p>
+          </div>
+          <button onClick="{{ restart }}" style="padding:16px;border:none;border-radius:12px;background:#ffcb47;color:#12141f;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:16px;cursor:pointer;animation:fsLockGlow 2s ease-out .6s 1" style-hover="background:#f0bb2e">Fais le mini test gratuit · 30 questions</button>
+          <div style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.14em;color:#8A93A6">GRATUIT · SANS CARTE · TON PLAN EN SORTIE</div>
+        </div>
+      </sc-if>
+    </div>
+
+    <!-- ===== NARRATEUR ===== -->
+    <div data-fix style="position:fixed;left:50%;transform:translateX(-50%);bottom:70px;z-index:60;width:calc(100% - 20px);max-width:410px;background:#fff;border:1px solid rgba(184,134,43,0.4);border-radius:14px;box-shadow:0 12px 36px rgba(14,42,78,0.25);padding:12px 14px">
+      <div style="position:absolute;top:0;left:12px;right:12px;height:3px;border-radius:0 0 3px 3px;background:#B8862B"></div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.16em;color:#8E6817;margin-bottom:4px">{{ storyEyebrow }}</div>
+      <p style="margin:0 0 10px;font-family:'Crimson Pro',serif;font-size:13.5px;line-height:1.45;color:#0E2A4E">{{ storyText }}</p>
+      <div style="display:flex;gap:8px">
+        <button onClick="{{ prev }}" style="flex:1;padding:11px;border:1px solid rgba(14,42,78,0.18);border-radius:10px;background:#fff;color:{{ prevColor }};font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14px;cursor:pointer" style-hover="background:#F6F3EC">← Précédent</button>
+        <button onClick="{{ next }}" style="flex:1.4;padding:11px;border:none;border-radius:10px;background:#ffcb47;color:#12141f;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14px;cursor:pointer" style-hover="background:#f0bb2e">{{ nextLabel }}</button>
+      </div>
+    </div>
+
+    <!-- ===== TAB BAR ===== -->
+    <div data-fix style="position:fixed;left:50%;transform:translateX(-50%);bottom:0;z-index:65;width:100%;max-width:430px;display:flex;background:#fff;border-top:1px solid rgba(14,42,78,0.08);padding:6px 4px 10px">
+      <span style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;border-radius:10px;color:{{ navBib.color }};background:{{ navBib.bg }};margin:0 2px">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14zM4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"></path></svg>
+        <span style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:10.5px">Biblio</span>
+      </span>
+      <span style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;border-radius:10px;color:{{ navPra.color }};background:{{ navPra.bg }};margin:0 2px">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="4.5"></circle><circle cx="12" cy="12" r="0.8" fill="currentColor"></circle></svg>
+        <span style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:10.5px">Pratique</span>
+      </span>
+      <span style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;border-radius:10px;color:{{ navHub.color }};background:{{ navHub.bg }};margin:0 2px">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"></circle><path d="M12 3v4M12 17v4M3 12h4M17 12h4"></path></svg>
+        <span style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:10.5px">Hub</span>
+      </span>
+      <span style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;border-radius:10px;color:{{ navPro.color }};background:{{ navPro.bg }};margin:0 2px">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"></path><path d="M15 7h6v6"></path></svg>
+        <span style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:10.5px">Progrès</span>
+      </span>
+      <span style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;border-radius:10px;color:{{ navBon.color }};background:{{ navBon.bg }};margin:0 2px">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4"></rect><path d="M5 12v8h14v-8M12 8v12M12 8s-4.5 0-4.5-2.5S12 3 12 8zM12 8s4.5 0 4.5-2.5S12 3 12 8z"></path></svg>
+        <span style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:10.5px">Bonus</span>
+      </span>
+    </div>
+
+  </div>
+</div>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#0E2A4E"/><circle cx="100" cy="100" r="46" fill="none" stroke="#F6F3EC" stroke-width="2"/><circle cx="100" cy="100" r="30" fill="none" stroke="#F6F3EC" stroke-width="1.4" opacity=".55"/><circle cx="100" cy="100" r="5" fill="#ffcb47"/><text x="100" y="164" text-anchor="middle" font-family="monospace" font-size="13" letter-spacing="3" fill="#EFD9A1">DEMO</text></svg></template>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:430,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  state = { step: 0, mktRate: 6, ccOn: false, ccMode: 'base', ccFc: false, dosGen: false, selConcept: null, selKind: null, selMat: null, genOn: false, chatMode: null, duel: 'q' };
+
+  componentDidMount() {
+    this._onKey = (e) => {
+      if (e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) return;
+      if (e.key === 'ArrowRight') this.go(this.state.step + 1);
+      if (e.key === 'ArrowLeft') this.go(this.state.step - 1);
+      if (e.key === 'Escape') this.setState({ selConcept: null, chatMode: null, ccOn: false });
+    };
+    window.addEventListener('keydown', this._onKey);
+  }
+  componentWillUnmount() { window.removeEventListener('keydown', this._onKey); }
+
+  go(n) { this.setState({ step: Math.max(0, Math.min(7, n)), selConcept: null, chatMode: null, ccOn: false }); }
+
+  renderVals() {
+    const st = this.state;
+    const step = st.step;
+    const navOff = { bg: 'transparent', color: '#8A93A6' };
+    const navOn = { bg: '#EBF2FC', color: '#2F6BDB' };
+
+    const stories = [
+      { e: 'ÉTAPE 1/8 · UN MINI TEST, SI TU VEUX', t: '30 questions, ou saute-le. En 18 minutes tu sais où tu en es : pas une note, une carte.' },
+      { e: 'ÉTAPE 2/8 · TON PLAN, DANS PROGRESSION', t: 'Ton test devient un plan sur ton calendrier. Objectif : 100 heures ciblées, pas 300. Le jour J ne bouge pas.' },
+      { e: 'ÉTAPE 3/8 · LE COURS SE MANIPULE', t: 'Bouge le taux du marché dans le widget. Et touche le passage surligné : Coach l\u2019explique en connaissant ton dossier.' },
+      { e: 'ÉTAPE 4/8 · ELLE SE RAPPELLE DE TOUT', t: 'L\u2019onglet Maîtrise tient ton dossier : demandes, surlignages, erreurs. Coach t\u2019en fait des fiches : essaie le bouton.' },
+      { e: 'ÉTAPE 5/8 · LE MOCK, TÔT ET EXPRÈS', t: 'Mock passé bien plus tôt qu\u2019en prépa classique. Se tromper maintenant, apprendre vite : le débrief te dit où tirer.' },
+      { e: 'ÉTAPE 6/8 · TON HUB DEVIENT FORT', t: 'Ta carte gagne en précision, concept par concept. Touche une case rouge, ou « Coaching ciblé » pour une heure dédiée.' },
+      { e: 'ÉTAPE 7/8 · LE DUEL', t: 'Tu joues contre d\u2019autres candidats sur vos propres erreurs. Réponds à la question 5 : elle sort de ton dossier d\u2019hier.' },
+      { e: 'ÉTAPE 8/8 · TU SAIS OÙ TU VAS', t: 'Prédiction jour J : 88 %, calibrée sur tes 1 240 réponses. 54 heures investies contre 300 en prépa classique.' },
+    ];
+
+    const scanRows = [
+      { name: 'Éthique', pct: '72%', w: '72%', color: '#1F7A4D', pctColor: '#1F7A4D' },
+      { name: 'Méth. quant.', pct: '64%', w: '64%', color: '#4E9B6E', pctColor: '#4E9B6E' },
+      { name: 'Économie', pct: '58%', w: '58%', color: '#B8912C', pctColor: '#B8912C' },
+      { name: 'États financiers', pct: '61%', w: '61%', color: '#B8912C', pctColor: '#B8912C' },
+      { name: 'Émetteurs', pct: '55%', w: '55%', color: '#C96A1E', pctColor: '#C96A1E' },
+      { name: 'Actions', pct: '52%', w: '52%', color: '#C96A1E', pctColor: '#C96A1E' },
+      { name: 'Taux fixe', pct: '34%', w: '34%', color: '#B93A28', pctColor: '#B93A28' },
+      { name: 'Dérivés', pct: '41%', w: '41%', color: '#B93A28', pctColor: '#B93A28' },
+      { name: 'Alternatifs', pct: '57%', w: '57%', color: '#C96A1E', pctColor: '#C96A1E' },
+      { name: 'Portefeuille', pct: '60%', w: '60%', color: '#B8912C', pctColor: '#B8912C' },
+    ];
+
+    const evC = (t) => ({ k: 'C', t, bg: '#fff' });
+    const evQ = (t) => ({ k: 'Q', t, bg: '#fff' });
+    const evM = (t) => ({ k: 'M', t, bg: '#FBF3E1' });
+    const sday = (d, ev, today) => ({ d, ev: ev || [], empty: !ev || ev.length === 0, bg: today ? '#FDF8EC' : '#fff', numColor: today ? '#12141f' : '#8A93A6', numBg: today ? '#ffcb47' : 'rgba(14,42,78,0.05)' });
+    const semList = [
+      sday('LUN 8'),
+      sday('MAR 9', [evQ('Questions : Courbe des taux')]),
+      sday('MER 10'),
+      sday('JEU 11', [evC('Cours : Spreads de crédit'), evQ('Questions : Spreads')], true),
+      sday('VEN 12'),
+      sday('SAM 13', [evQ('Série : points faibles')]),
+      sday('DIM 14', [evM('MOCK 1 · 180 QUESTIONS')]),
+    ];
+
+    // Widget rate-trap
+    const r = st.mktRate / 100;
+    const price = 40 * ((1 - Math.pow(1 + r, -5)) / r) + 1000 * Math.pow(1 + r, -5);
+    const fmtEur = (v) => { const s = v.toFixed(2).replace('.', ','); return s.length > 6 ? s.slice(0, s.length - 6) + '\u202F' + s.slice(s.length - 6) : s; };
+    const mktLabel = String(st.mktRate).replace('.', ',') + ' %';
+    const rkind = st.mktRate > 4 ? 'dec' : (st.mktRate < 4 ? 'pri' : 'pair');
+    const W = {
+      dec: { who: 'Qui te l\u2019achèterait à 1000 alors qu\u2019il peut avoir mieux ailleurs ? Personne.', whoColor: '#F58BA0', whoBg: 'rgba(226,84,63,0.12)', whoBorder: 'rgba(226,84,63,0.5)', res: 'DÉCOTE (PRIX < NOMINAL)', resColor: '#F58BA0', resBg: 'rgba(226,84,63,0.1)', resBorder: 'rgba(226,84,63,0.45)', bar: '#C25368', tail: 'devenu MOINS attractif → ton prix baisse.' },
+      pri: { who: 'Tout le monde la veut : elle paie plus que le marché. Ton prix monte au-dessus de 1000.', whoColor: '#7DD3A5', whoBg: 'rgba(88,192,138,0.12)', whoBorder: 'rgba(88,192,138,0.5)', res: 'PRIME (PRIX > NOMINAL)', resColor: '#7DD3A5', resBg: 'rgba(88,192,138,0.1)', resBorder: 'rgba(88,192,138,0.45)', bar: '#3E8E68', tail: 'devenu PLUS attractif → ton prix monte.' },
+      pair: { who: 'Ton coupon vaut le marché : elle s\u2019échange au nominal.', whoColor: '#ffcb47', whoBg: 'rgba(255,203,71,0.1)', whoBorder: 'rgba(255,203,71,0.45)', res: 'AU PAIR (PRIX = NOMINAL)', resColor: '#ffcb47', resBg: 'rgba(255,203,71,0.08)', resBorder: 'rgba(255,203,71,0.4)', bar: '#B8862B', tail: 'égal au marché → prix au pair.' },
+    }[rkind];
+
+    const ccTexts = {
+      base: 'Le prix de ton obligation va baisser parce qu\u2019elle est devenue moins attractive. Si ton obligation ne rapporte que 4 % et le marché en offre 6 %, tu dois la vendre moins cher que 1 000 pour la rendre compétitive.',
+      simple: 'Encore plus simple : ton obligation est un vieux contrat qui paie 4 %. Le voisin vend le même contrat, mais il paie 6 %. Personne ne t\u2019achètera le tien au même prix : tu baisses le tien.',
+      example: 'Coupon de 40 par an pendant 5 ans, marché à 6 % : 40 × 4,2124 + 1000 ÷ 1,06⁵ = 915,75. La décote de 84,25 rend ton 4 % aussi attractif qu\u2019un 6 %.',
+      exam: 'À l\u2019examen : taux du marché > coupon → décote ; taux < coupon → prime. Toi, c\u2019est le sens que tu inverses : deux échecs au mini test (Q12, Q24), les deux fois pareil.',
+      trap: 'Le piège : croire que tu « perds » 84,25. Tu ne perds rien si tu gardes l\u2019obligation. La décote n\u2019existe que si tu vends aujourd\u2019hui.',
+    };
+    const ccChipBg = (m) => st.ccMode === m ? '#FBF3E1' : '#fff';
+    const ccChipBorder = (m) => st.ccMode === m ? '#B8862B' : 'rgba(14,42,78,0.16)';
+
+    const dosAsked = [
+      { q: 'Pourquoi la convexité joue toujours pour moi ?', meta: 'LEÇON · DURATION & CONVEXITÉ · HIER' },
+      { q: 'C\u2019est quoi la différence spread G / spread Z ?', meta: 'LEÇON · SPREADS · IL Y A 2 J' },
+      { q: 'Un exemple chiffré de pricing ?', meta: 'LEÇON · PRICING · IL Y A 2 J' },
+    ];
+    const dosMarks = [
+      { t: 'La convexité corrige l\u2019erreur de la duration, dans les deux sens.', meta: 'LEÇON · DURATION & CONVEXITÉ' },
+      { t: 'Prix et taux bougent toujours en sens inverse.', meta: 'LEÇON · PRICING D\u2019OBLIGATIONS' },
+    ];
+    const dosFails = [
+      { t: 'Duration 8, taux +50 pb → tu as répondu −8,0 %', meta: 'LEÇON · Q1 · HIER' },
+      { t: 'Convexité : signe du terme correcteur inversé', meta: 'MINI TEST · Q12 & Q24' },
+      { t: 'Spread de crédit : confusion G / Z', meta: 'QBANK · IL Y A 2 J' },
+    ];
+
+    const T = {
+      red: { bg: '#FBEDEA', border: '#E9B7AE', borderStyle: 'solid', dot: '#C2442E', metaColor: '#B93A28', hasDot: true },
+      dash: { bg: '#EFF2F6', border: '#B9C2CF', borderStyle: 'dashed', dot: '', metaColor: '#55647E', hasDot: false },
+      white: { bg: '#fff', border: 'rgba(14,42,78,0.10)', borderStyle: 'solid', dot: '', metaColor: '#B9C2CF', hasDot: false },
+      green: { bg: '#E7F1EB', border: '#A5CDB6', borderStyle: 'solid', dot: '#1F7A4D', metaColor: '#25543C', hasDot: true },
+    };
+    const tile = (mat, name, kind, meta, move) => ({
+      name, ...T[kind], metaText: meta,
+      hasMove: !!move, moveGlyph: move || '', moveColor: move === '↗' ? '#1F7A4D' : '#B93A28',
+      onOpen: () => this.setState({ selConcept: name, selKind: kind, selMat: mat, genOn: false, chatMode: null }),
+    });
+    const groups = [
+      { name: 'Éthique', moveFrom: '33%', moveGlyph: '↗', moveColor: '#1F7A4D', pctLabel: '34%', countLabel: '26 CONCEPTS', concepts: [
+        tile('ÉTHIQUE', 'Éthique, confiance et marchés', 'red', '17%', ''),
+        tile('ÉTHIQUE', 'II(A) Information matérielle non publique', 'red', '20%', ''),
+        tile('ÉTHIQUE', 'III(B) Fair dealing', 'red', '0%', '↘'),
+        tile('ÉTHIQUE', 'IV(A) Loyauté envers l\u2019employeur', 'red', '20%', ''),
+        tile('ÉTHIQUE', 'I(A) Connaissance de la loi', 'dash', '1/3 QUESTIONS', ''),
+        tile('ÉTHIQUE', 'V(A) Diligence et base raisonnable', 'white', '·', ''),
+      ] },
+      { name: 'Taux fixe', moveFrom: '34%', moveGlyph: '↗', moveColor: '#1F7A4D', pctLabel: '68%', countLabel: '11 CONCEPTS', concepts: [
+        tile('TAUX FIXE', 'Duration & convexité', 'green', '82% · 14 Q', '↗'),
+        tile('TAUX FIXE', 'Pricing d\u2019obligations', 'green', '76% · 11 Q', '↗'),
+        tile('TAUX FIXE', 'Spreads de crédit', 'red', '45% · 6 Q', ''),
+        tile('TAUX FIXE', 'Titrisation, ABS & MBS', 'dash', '2/3 QUESTIONS', ''),
+      ] },
+    ];
+
+    const filterChips = [
+      { label: 'TOUS 251', bg: '#12141F', border: '#12141F', color: '#fff', hasDot: false, dot: '' },
+      { label: 'CRITIQUE 21', bg: '#fff', border: 'rgba(14,42,78,0.14)', color: '#55647E', hasDot: true, dot: '#C2442E' },
+      { label: 'FRAGILE 2', bg: '#fff', border: 'rgba(14,42,78,0.14)', color: '#55647E', hasDot: true, dot: '#C96A1E' },
+      { label: 'MOYEN 1', bg: '#fff', border: 'rgba(14,42,78,0.14)', color: '#55647E', hasDot: true, dot: '#B8912C' },
+      { label: 'SOLIDE 3', bg: '#fff', border: 'rgba(14,42,78,0.14)', color: '#55647E', hasDot: true, dot: '#4E9B6E' },
+      { label: 'EN ÉVALUATION 65', bg: '#fff', border: 'rgba(14,42,78,0.14)', color: '#55647E', hasDot: true, dot: '#93A1B5' },
+      { label: 'JAMAIS VU 159', bg: '#fff', border: 'rgba(14,42,78,0.14)', color: '#55647E', hasDot: true, dot: '#D8DCE3' },
+    ];
+
+    const chipRed = { bg: '#F6E5E3', border: '#D99389', dot: '#B93A28', text: '#9B3326' };
+    const chipGreen = { bg: '#E7F1EB', border: '#A5CDB6', dot: '#4E9B6E', text: '#25543C' };
+    const chipGray = { bg: '#EFF2F6', border: '#B9C2CF', dot: '#93A1B5', text: '#55647E' };
+    const named = {
+      'III(B) Fair dealing': {
+        level: 'Critique', chip: chipRed, evidence: '8 questions · 6 échecs · prouvé', 
+        errors: [
+          { src: 'MOCK 1', date: '28 JUIN', q: 'An analyst disseminates a rating change to preferred clients first. This MOST likely violates…', rep: 'Ta réponse : III(A) Loyauté · Faux' },
+          { src: 'QBANK', date: '25 JUIN', q: 'Under III(B), oversubscribed IPO allocations should be…', rep: 'Ta réponse : premier arrivé, premier servi · Faux' },
+        ],
+        redo: 'Refaire mes 6 erreurs · 11 min', genSub: 'Sur tes 6 erreurs · ≈ 6 min',
+      },
+      'II(A) Information matérielle non publique': {
+        level: 'Critique', chip: chipRed, evidence: '6 questions · 2 échecs · même piège',
+        errors: [
+          { src: 'MOCK 1', date: '28 JUIN', q: 'An analyst receives MNPI during a client call. He should MOST likely…', rep: 'Ta réponse : tout interdire d\u2019office · Faux' },
+          { src: 'QBANK', date: '24 JUIN', q: 'Under the mosaic theory, an analyst may act on…', rep: 'Ta réponse : aucune info non publique · Faux' },
+        ],
+        redo: 'Refaire mes 2 erreurs · 5 min', genSub: 'Sur tes 2 erreurs · ≈ 4 min',
+      },
+      'IV(A) Loyauté envers l\u2019employeur': {
+        level: 'Critique', chip: chipRed, evidence: '5 questions · 4 échecs',
+        errors: [
+          { src: 'MOCK 1', date: '28 JUIN', q: 'Leaving with client records to a new employer MOST likely violates…', rep: 'Ta réponse : aucun standard · Faux' },
+        ],
+        redo: 'Refaire mes 4 erreurs · 8 min', genSub: 'Sur tes 4 erreurs · ≈ 5 min',
+      },
+    };
+    const greenDefault = {
+      level: 'Solide', chip: chipGreen, evidence: '14 questions · 2 échecs · en progression',
+      errors: [
+        { src: 'QBANK', date: '12 JUIN', q: 'A bond with modified duration of 6.5 and convexity of 42…', rep: 'Ta réponse : 6,29 % (signe inversé) · Faux' },
+        { src: 'LEÇON', date: '9 JUIN', q: 'Duration 8, rates +50 bp. Price change is closest to…', rep: 'Ta réponse : −8,0 % · Faux' },
+      ],
+      redo: 'Refaire mes 2 erreurs · 4 min', genSub: 'Sur tes 2 erreurs · ≈ 4 min',
+    };
+    const sel = st.selConcept;
+    const kind = st.selKind || 'green';
+    let pd;
+    if (sel && named[sel]) pd = named[sel];
+    else if (kind === 'green') pd = greenDefault;
+    else if (kind === 'red') pd = { level: 'Critique', chip: chipRed, evidence: 'prouvé par tes réponses · à régler', errors: [], redo: 'Refaire mes erreurs · 10 min', genSub: 'Sur tes erreurs · ≈ 5 min', noErr: 'Tes erreurs détaillées s\u2019archivent ici, avec ta réponse et la correction.' };
+    else if (kind === 'dash') pd = { level: 'En évaluation', chip: chipGray, evidence: 'encore 1 à 2 questions pour prouver', errors: [], redo: 'Prouver ce concept · 3 questions', genSub: 'Après 3 questions', noErr: 'Réponds à 3 questions : sa couleur devient une preuve, pas une impression.' };
+    else pd = { level: 'Jamais vu', chip: chipGray, evidence: 'aucune question pour l\u2019instant', errors: [], redo: 'Découvrir ce concept · 3 questions', genSub: 'Après 3 questions', noErr: 'Concept pas encore croisé. Trois questions suffisent pour l\u2019allumer sur ta carte.' };
+    const pHasErr = pd.errors.length > 0;
+
+    const tint = (p) => p < 35 ? '#B93A28' : p < 50 ? '#C96A1E' : p < 70 ? '#B8912C' : p < 85 ? '#4E9B6E' : '#1F7A4D';
+    const MOCK = [
+      ['Éthique', 24], ['Portefeuille', 31], ['États fin.', 33],
+      ['Alternatifs', 45], ['Actions', 52], ['Émetteurs', 55],
+      ['Dérivés', 58], ['Économie', 74], ['Taux fixe', 90], ['Méth. quant.', 94],
+    ];
+    const mockRows = MOCK.map(([name, p]) => ({ name, w: p + '%', score: p + '%', color: tint(p) }));
+
+    const conceptChat = {
+      'II(A) Information matérielle non publique': {
+        meta: 'CRITIQUE · 2 ÉCHECS',
+        b1: 'Je vois pourquoi tu viens. Tu confonds ce qu\u2019on peut utiliser et ce sur quoi on peut agir : les deux fois tu as pensé qu\u2019avoir de l\u2019info non publique, c\u2019était l\u2019interdire d\u2019office, au lieu de la compartimenter et de l\u2019écarter du trading.',
+        b2: 'C\u2019est la différence entre une restriction de source et une restriction de comportement.',
+        rule: 'MNPI : tu peux la recevoir, l\u2019analyser, la garder en stock. Tu ne peux PAS l\u2019utiliser pour trader ou conseiller. Isolation = cloisonner, pas détruire.',
+      },
+      'III(B) Fair dealing': {
+        meta: 'CRITIQUE · 6 ÉCHECS',
+        b1: 'Deux fois le même piège : tu traites « fair » comme « égal ». III(B) demande un traitement équitable, pas identique : tous les clients concernés, en même temps, selon leur mandat.',
+        b2: '',
+        rule: 'Fair dealing : diffusion simultanée à tous les clients concernés. IPO sursouscrite = pro-rata, jamais premier arrivé.',
+      },
+    };
+    const chatMode = st.chatMode;
+    let chat = null;
+    if (chatMode === 'coaching') {
+      chat = { dot: '#B8862B', name: 'Coaching ciblé', meta: '3 POINTS FAIBLES', b1: 'Trois concepts te coûtent 19 points, et c\u2019est prouvé par tes réponses : Fair dealing, IPS, Impairment. Je te propose une heure de coaching dédiée, construite sur tes erreurs à toi : 20 minutes par concept.', b2: '', rule: '', coach: true };
+    } else if (chatMode === 'concept') {
+      const cc = conceptChat[sel] || { meta: (pd.level || '').toUpperCase(), b1: 'Je vois pourquoi tu viens. J\u2019ai tes dernières réponses sur ce concept sous les yeux : dis-moi ce qui bloque, je pars de là.', b2: '', rule: '' };
+      chat = { dot: pd.chip.dot, name: sel || 'Ton dossier', meta: cc.meta, b1: cc.b1, b2: cc.b2, rule: cc.rule, coach: false };
+    }
+
+    const streakTicks = [1, 1, 1, 1, 1, 1, 0].map(v => ({ bg: v ? '#B8862B' : 'rgba(14,42,78,0.12)' }));
+    const jDays = ['J−41', 'J−41', 'J−38', 'J−38', 'J−27', 'J−25', 'J−22', 'J−20'];
+
+    const dots = stories.map((s, i) => ({
+      name: s.e,
+      bg: i === step ? '#ffcb47' : (i < step ? 'rgba(255,203,71,0.45)' : 'rgba(246,243,236,0.22)'),
+      go: () => this.go(i),
+    }));
+
+    return {
+      stepNum: String(step + 1),
+      s1: step === 0, s2: step === 1, s3: step === 2, s4: step === 3, s5: step === 4, s6: step === 5, s7: step === 6, s8: step === 7,
+      dots,
+      jDay: jDays[step],
+      navBib: (step === 2 || step === 3) ? navOn : navOff,
+      navPra: (step === 0 || step === 4) ? navOn : navOff,
+      navHub: step === 5 ? navOn : navOff,
+      navPro: (step === 1 || step === 7) ? navOn : navOff,
+      navBon: step === 6 ? navOn : navOff,
+      storyEyebrow: stories[step].e,
+      storyText: stories[step].t,
+      prev: () => this.go(step - 1),
+      next: () => this.go(step === 7 ? 0 : step + 1),
+      restart: () => this.go(0),
+      goHub: (e) => { if (e && e.preventDefault) e.preventDefault(); this.go(5); },
+      nextLabel: step === 7 ? 'Revoir la démo' : 'Suivant →',
+      prevColor: step === 0 ? '#B9C2CF' : '#0E2A4E',
+      scanRows, semList, mockRows, groups, filterChips,
+      dosAsked, dosMarks, dosFails,
+      // widget
+      mktRate: st.mktRate,
+      onRate: (e) => this.setState({ mktRate: parseFloat(e.target.value) }),
+      mktLabel,
+      whoLine: W.who, whoColor: W.whoColor, whoBg: W.whoBg, whoBorder: W.whoBorder,
+      priceW: Math.min(100, price / 1100 * 100).toFixed(1) + '%',
+      priceColor: W.bar,
+      priceLabel: fmtEur(price),
+      resLabel: W.res, resColor: W.resColor, resBg: W.resBg, resBorder: W.resBorder,
+      resTail: W.tail,
+      // chat sélection
+      openCc: () => this.setState({ ccOn: true, ccMode: 'base' }),
+      closeCc: () => this.setState({ ccOn: false }),
+      ccOn: st.ccOn,
+      ccSelBg: st.ccOn ? 'rgba(47,107,219,0.28)' : 'rgba(47,107,219,0.14)',
+      ccText: ccTexts[st.ccMode],
+      ccSimple: () => this.setState({ ccMode: 'simple' }),
+      ccExample: () => this.setState({ ccMode: 'example' }),
+      ccExam: () => this.setState({ ccMode: 'exam' }),
+      ccTrap: () => this.setState({ ccMode: 'trap' }),
+      ccSimpleBg: ccChipBg('simple'), ccSimpleBorder: ccChipBorder('simple'),
+      ccExBg: ccChipBg('example'), ccExBorder: ccChipBorder('example'),
+      ccExamBg: ccChipBg('exam'), ccExamBorder: ccChipBorder('exam'),
+      ccTrapBg: ccChipBg('trap'), ccTrapBorder: ccChipBorder('trap'),
+      ccFcGo: () => this.setState({ ccFc: true }),
+      ccFcLabel: st.ccFc ? '✓ Flashcard créée · demain 9h' : '✳ Fais-m\u2019en une flashcard',
+      ccFcBg: st.ccFc ? '#FBF3E1' : '#fff',
+      // dossier
+      dosGen: st.dosGen,
+      dosGenGo: () => this.setState({ dosGen: true }),
+      dosBtnLabel: st.dosGen ? '✓ Fiche créée' : 'Créer ma fiche depuis mon dossier',
+      dosBtnBg: st.dosGen ? '#EFD9A1' : '#ffcb47',
+      // panneau concept
+      panelOpen: sel !== null && chatMode === null,
+      closePanel: () => this.setState({ selConcept: null }),
+      pMat: st.selMat || 'TAUX FIXE', pName: sel || '',
+      pChipBg: pd.chip.bg, pChipBorder: pd.chip.border, pChipDot: pd.chip.dot, pChipText: pd.chip.text,
+      pLevel: pd.level, pEvidence: pd.evidence,
+      pErrors: pd.errors, pRedoLabel: pd.redo,
+      pHasErr, pNoErr: !pHasErr, pNoErrText: pd.noErr || '',
+      pGenSub: st.genOn ? 'Créé · dans Bibliothèque' : pd.genSub,
+      genFiche: () => this.setState({ genOn: true }),
+      genLabel: st.genOn ? '✓ Généré' : '+ Générer',
+      genBg: st.genOn ? '#F6F3EC' : '#fff',
+      genBorder: st.genOn ? '#B8862B' : 'rgba(14,42,78,0.16)',
+      genColor: st.genOn ? '#8E6817' : '#0E2A4E',
+      // chat
+      openChat: () => this.setState({ chatMode: 'concept' }),
+      openCoach: () => this.setState({ chatMode: 'coaching' }),
+      closeChat: () => this.setState({ chatMode: null }),
+      chatOn: chat !== null,
+      chatDot: chat ? chat.dot : '#B8862B',
+      chatName: chat ? chat.name : '',
+      chatMeta: chat ? chat.meta : '',
+      chatB1: chat ? chat.b1 : '',
+      chatB2: chat ? chat.b2 : '',
+      chatHasB2: !!(chat && chat.b2),
+      chatRule: chat ? chat.rule : '',
+      chatHasRule: !!(chat && chat.rule),
+      chatCoach: !!(chat && chat.coach),
+      // duel
+      streakTicks, streakLabel: 'SÉRIE DE 6 J',
+      duelQ: st.duel === 'q', duelWon: st.duel === 'won', duelLost: st.duel === 'lost',
+      duelPickA: () => this.setState({ duel: 'won' }),
+      duelPickB: () => this.setState({ duel: 'lost' }),
+      duelPickC: () => this.setState({ duel: 'lost' }),
+      duelReset: () => this.setState({ duel: 'q' }),
+    };
+  }
+}
+</script>
+</body>
+</html>
