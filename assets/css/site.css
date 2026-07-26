@@ -271,7 +271,7 @@ h1, h2, h3 { font-family: var(--pl-font-display); letter-spacing: var(--pl-track
 .stats-wrap { padding-bottom: 56px; }
 .stats {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1px;
   background: var(--pl-border);
   border: 1px solid var(--pl-border);
