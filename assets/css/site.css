@@ -291,7 +291,7 @@ h1, h2, h3 { font-family: var(--pl-font-display); letter-spacing: var(--pl-track
 }
 
 .section-cta { display: flex; flex-wrap: wrap; gap: 16px 20px; align-items: center; }
-.section-cta .pl-label { max-width: 34ch; line-height: 1.8; }
+.section-cta .pl-label { line-height: 1.8; }
 
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
@@ -385,7 +385,6 @@ h1, h2, h3 { font-family: var(--pl-font-display); letter-spacing: var(--pl-track
   font-size: clamp(34px, 5vw, 56px);
   line-height: 1.04;
   margin: 16px 0 18px;
-  max-width: 24ch;
 }
 .contact p {
   font-size: 18px;
