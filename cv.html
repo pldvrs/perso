@@ -48,6 +48,9 @@ body {
   text-decoration: none;
 }
 .bar a.back:hover { color: #B8862B; }
+.bar-left { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; }
+.bar a.alt { color: #12365c; }
+.bar a.alt:hover { color: #B8862B; }
 .bar button {
   font-family: Georgia, serif;
   font-size: 14px;
@@ -136,7 +139,10 @@ b { font-weight: 700; }
 <body>
 
 <div class="bar">
-  <a class="back" href="index.html">← pierrelouisdivaris.com</a>
+  <div class="bar-left">
+    <a class="back" href="index.html">← pierrelouisdivaris.com</a>
+    <a class="back alt" href="fiche.html">Version détaillée →</a>
+  </div>
   <button type="button" id="print">Imprimer / enregistrer en PDF</button>
 </div>
 
@@ -202,7 +208,7 @@ b { font-weight: 700; }
     <li><b>Languages:</b> French (native), English (business fluent), Spanish and Italian (proficient).</li>
     <li><b>Technical:</b> Salesforce, Power BI, Python; SQL and Supabase (working knowledge); API and data-feed integrations.</li>
     <li><b>Generative AI:</b> daily practice with Claude and agent tooling; ships personal projects end to end (product design, code, database, automated study-plan engine).</li>
-    <li><b>Sports:</b> swimming (former national champion), volleyball, tennis.</li>
+    <li><b>Sports:</b> swimming (former national champion), tennis.</li>
   </ul>
 
 </main>
