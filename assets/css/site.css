@@ -466,6 +466,106 @@ h1, h2, h3 { font-family: var(--pl-font-display); letter-spacing: var(--pl-track
 
 
 /* ============================================================
+   Boîte de contact
+   ============================================================ */
+
+#contact-dialog {
+  width: min(520px, calc(100vw - 32px));
+  padding: 0;
+  border: 1px solid var(--pl-border-strong);
+  border-radius: var(--pl-radius-lg);
+  background: var(--pl-white);
+  color: var(--pl-navy);
+  box-shadow: 0 24px 64px rgba(14, 42, 78, .28);
+  overflow: visible;
+}
+#contact-dialog::backdrop { background: rgba(9, 26, 49, .55); backdrop-filter: blur(3px); }
+
+.dialog-close-form { margin: 0; }
+.dialog-close-form button {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: var(--pl-radius-pill);
+  background: transparent;
+  color: var(--pl-muted);
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
+.dialog-close-form button:hover { background: var(--pl-paper); color: var(--pl-navy); }
+
+.dialog-body { padding: 30px 30px 28px; }
+.dialog-body h2 {
+  font-family: var(--pl-font-display);
+  font-weight: 700;
+  font-size: 27px;
+  line-height: 1.1;
+  letter-spacing: var(--pl-track-tight);
+  margin: 12px 0 22px;
+}
+
+#contact-form label {
+  display: block;
+  font-family: var(--pl-font-mono);
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--pl-muted);
+  margin-bottom: 6px;
+}
+#contact-form input,
+#contact-form select,
+#contact-form textarea {
+  width: 100%;
+  font-family: var(--pl-font-body);
+  font-size: 16px;
+  color: var(--pl-navy);
+  background: var(--pl-white);
+  padding: 11px 13px;
+  margin-bottom: 16px;
+  border: 1px solid var(--pl-border-strong);
+  border-radius: var(--pl-radius-md);
+  transition: border-color var(--pl-dur-fast) var(--pl-ease);
+}
+#contact-form textarea { resize: vertical; min-height: 110px; line-height: 1.45; }
+#contact-form input:focus,
+#contact-form select:focus,
+#contact-form textarea:focus { border-color: var(--pl-gold); }
+#contact-form input[aria-invalid='true'],
+#contact-form textarea[aria-invalid='true'] { border-color: #B93A28; }
+#contact-form button[type='submit'] { width: 100%; margin-top: 4px; }
+
+/* Le champ que seuls les robots remplissent. */
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.form-error {
+  font-size: 15px;
+  line-height: 1.45;
+  color: #B93A28;
+  margin: 0 0 14px;
+}
+.form-note {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--pl-muted);
+  margin: 14px 0 0;
+  text-align: center;
+  text-wrap: pretty;
+}
+.sent-title {
+  font-family: var(--pl-font-display);
+  font-weight: 600;
+  font-size: 22px;
+  margin: 0 0 8px;
+}
+.sent-body { font-size: 16px; line-height: 1.5; color: var(--pl-prose); margin: 0 0 22px; }
+
+
+/* ============================================================
    Responsive — verified down to 380px
    ============================================================ */
 

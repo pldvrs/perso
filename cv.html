@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pierre-Louis Divaris, CFA — CV</title>
+<meta name="description" content="CV of Pierre-Louis Divaris, CFA — analytics sales for institutional investors. MSCI, FactSet, Kepler Cheuvreux, Crédit Agricole CIB.">
+<link rel="canonical" href="https://pierrelouisdivaris.com/cv.html">
+<meta name="theme-color" content="#12365c">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<style>
+/* ============================================================
+   Feuille A4 imprimable. Volontairement en Georgia et sans
+   fioriture : un CV doit rester lisible par les robots des
+   cabinets de recrutement, pas seulement par un humain.
+   ============================================================ */
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #E9E7E1;
+  font-family: Georgia, 'Times New Roman', serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- Barre d'action : écran seulement ---- */
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 14px 20px;
+  background: rgba(233, 231, 225, .93);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(18, 54, 92, .12);
+}
+.bar a.back {
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #8E6817;
+  text-decoration: none;
+}
+.bar a.back:hover { color: #B8862B; }
+.bar button {
+  font-family: Georgia, serif;
+  font-size: 14px;
+  padding: 9px 18px;
+  min-height: 40px;
+  border: 1px solid rgba(18, 54, 92, .25);
+  border-radius: 8px;
+  background: #12365c;
+  color: #fff;
+  cursor: pointer;
+}
+.bar button:hover { background: #0d2743; }
+.bar button:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(184, 134, 43, .4); }
+
+.sheet-wrap { padding: 28px 16px 56px; display: flex; justify-content: center; }
+
+.page {
+  width: 8.27in;
+  min-height: 11.69in;
+  background: #fff;
+  box-shadow: 0 8px 32px rgba(18, 54, 92, .16);
+  padding: 0.42in 0.55in;
+  color: #1a1a1a;
+  font-size: 9.8pt;
+  line-height: 1.38;
+  display: flex;
+  flex-direction: column;
+}
+
+.head { display: flex; align-items: center; gap: 18px; padding-bottom: 12px; border-bottom: 2px solid #12365c; margin-bottom: 6px; }
+.head img { width: 0.95in; height: 0.95in; object-fit: cover; border-radius: 50%; flex: none; }
+.name { font-size: 18pt; font-weight: 700; letter-spacing: .01em; color: #12365c; }
+.tagline { font-size: 9.5pt; color: #333; margin-top: 2px; }
+.contact { font-size: 8.5pt; color: #555; margin-top: 3px; }
+.contact a { color: #555; text-decoration: none; }
+.contact a:hover { color: #12365c; }
+
+h2 {
+  font-size: 10pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: #12365c;
+  border-bottom: 1px solid rgba(18, 54, 92, .35);
+  padding-bottom: 2px;
+  margin: 13px 0 5px;
+}
+h2:first-of-type { margin-top: 11px; }
+
+p { margin: 0; }
+ul { margin: 2px 0 0; padding-left: 16px; }
+li { margin-bottom: 2px; }
+.role { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.role + .role, .job { margin-top: 9px; }
+.role .what { font-weight: 700; }
+.role .when { font-size: 8.5pt; color: #555; white-space: nowrap; }
+.edu { display: flex; justify-content: space-between; gap: 12px; margin-top: 2px; }
+.edu:first-of-type { margin-top: 0; }
+.edu .when { font-size: 8.5pt; color: #555; white-space: nowrap; }
+b { font-weight: 700; }
+
+/* ---- Petits écrans : la feuille A4 ne rentre pas, on la laisse respirer ---- */
+@media (max-width: 900px) {
+  .sheet-wrap { padding: 16px 10px 40px; }
+  .page { width: 100%; min-height: 0; padding: 26px 20px; font-size: 11px; }
+  .name { font-size: 22px; }
+  .head { gap: 14px; }
+  .head img { width: 68px; height: 68px; }
+  h2 { font-size: 12px; }
+  .role, .edu { flex-direction: column; gap: 0; }
+  .role .when, .edu .when { font-size: 10px; }
+}
+
+/* ---- Impression : la feuille seule, sans ombre ni barre ---- */
+@page { size: A4; margin: 0; }
+@media print {
+  body { background: #fff; }
+  .bar { display: none; }
+  .sheet-wrap { padding: 0; }
+  .page { width: auto; min-height: 0; box-shadow: none; padding: 0.42in 0.55in; font-size: 9.8pt; }
+  .role, .edu { flex-direction: row; gap: 12px; }
+  a { color: inherit; }
+}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <a class="back" href="index.html">← pierrelouisdivaris.com</a>
+  <button type="button" id="print">Imprimer / enregistrer en PDF</button>
+</div>
+
+<div class="sheet-wrap">
+<main class="page">
+
+  <header class="head">
+    <img src="assets/img/pierre-louis-divaris.jpg" width="800" height="800" alt="Pierre-Louis Divaris">
+    <div>
+      <div class="name">Pierre-Louis Divaris, CFA</div>
+      <div class="tagline">Analytics sales for institutional investors</div>
+      <div class="contact">Paris, France · <a href="mailto:pierrelouisdivaris@gmail.com">pierrelouisdivaris@gmail.com</a> · <a href="https://www.linkedin.com/in/pierrelouisdivaris/" rel="noopener">linkedin.com/in/pierrelouisdivaris</a></div>
+    </div>
+  </header>
+
+  <h2>Profile</h2>
+  <p>Sales professional in complex, multi-stakeholder sales of analytics solutions to institutional investors and asset managers: a book of 20+ accounts, several million euros in ARR, average deal around €100k. CFA charterholder, strong on factor risk, credit and liquidity risk, and performance attribution. Builds his own tools with generative AI.</p>
+
+  <h2>Professional Experience</h2>
+
+  <div class="role">
+    <span class="what">MSCI, Senior Associate, Analytics Sales</span>
+    <span class="when">Paris · Oct. 2025 – Present</span>
+  </div>
+  <ul>
+    <li>Own the full sales cycle for portfolio and risk analytics (factor models, portfolio construction, multi-asset market, credit and liquidity risk, performance attribution) for institutional investors and fund managers.</li>
+    <li>Manage and grow a book of 20+ institutional accounts, multi-million € ARR, typical deals around €100k with long cycles and senior stakeholders (CIO, risk, operations).</li>
+  </ul>
+
+  <div class="role job">
+    <span class="what">FactSet, Asset Management Sales Specialist</span>
+    <span class="when">Paris · Feb. 2024 – Oct. 2025</span>
+  </div>
+  <ul>
+    <li>Sold multi-asset performance and risk analysis solutions (SaaS, API), extending to automated compliance, reporting and fund-distribution workflows.</li>
+    <li>Grew the opportunity pipeline by 30% in two months through targeted tech-touch initiatives.</li>
+  </ul>
+
+  <div class="role job">
+    <span class="what">FactSet, Consultant then Strategic Consultant, Key Accounts (France, Switzerland)</span>
+    <span class="when">Jul. 2020 – Jan. 2024</span>
+  </div>
+  <ul>
+    <li>Led solution integrations for two major Swiss accounts: 8 of 8 projects delivered, securing over USD 2M in annual revenues.</li>
+    <li>Trained 200+ portfolio managers and bankers annually on SaaS and API solutions, lifting product engagement by 20%+.</li>
+  </ul>
+
+  <h2>Leadership</h2>
+  <ul>
+    <li><b>CFA Society France, CFA Research Challenge lead organizer (since 2024):</b> ran the national competition on corporate cases with Thales and Kering, working directly with their executive leadership and investor relations; recruited graders, built the jury, ran the national final. 39 reports submitted last edition.</li>
+    <li><b>Top Finance, lecturer:</b> finance courses and exam prep (CFA, university level) for students and professionals.</li>
+    <li><b>HEC Montréal student association, VP:</b> elected by 4,000 students; €1.3M budget, 300 volunteers.</li>
+  </ul>
+
+  <h2>Education</h2>
+  <div class="edu"><span><b>CFA Institute</b>, Chartered Financial Analyst (charterholder)</span><span class="when">2023</span></div>
+  <div class="edu"><span><b>EDHEC Business School</b>, MSc Corporate Finance &amp; Banking (Honors, Dean's list, top 10%)</span><span class="when">2019</span></div>
+  <div class="edu"><span><b>HEC Montréal</b>, Trilingual BBA, Finance specialization</span><span class="when">2018</span></div>
+  <div class="edu"><span><b>Baccalauréat ES</b>, mention Très Bien</span><span class="when">2014</span></div>
+
+  <h2>Skills &amp; Interests</h2>
+  <ul>
+    <li><b>Languages:</b> French (native), English (business fluent), Spanish and Italian (proficient).</li>
+    <li><b>Technical:</b> Salesforce, Power BI, Python; SQL and Supabase (working knowledge); API and data-feed integrations.</li>
+    <li><b>Generative AI:</b> daily practice with Claude and agent tooling; ships personal projects end to end (product design, code, database, automated study-plan engine).</li>
+    <li><b>Sports:</b> swimming (former national champion), volleyball, tennis.</li>
+  </ul>
+
+</main>
+</div>
+
+<script>
+  document.getElementById('print').addEventListener('click', function () { window.print(); });
+</script>
+</body>
+</html>
