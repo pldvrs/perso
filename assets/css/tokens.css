@@ -1,0 +1,76 @@
+/* ============================================================
+   Design tokens — couleurs, typographie, espacements, ombres.
+   Tout le reste du CSS s'y réfère : c'est le seul endroit à modifier
+   pour changer l'apparence. Les polices sont liées depuis index.html
+   plutôt qu'@import-ées, pour qu'elles chargent en parallèle.
+   ============================================================ */
+
+:root {
+  /* ---- Brand palette ---- */
+  --pl-navy:        #0E2A4E;  /* text, structure, secondary CTA            */
+  --pl-navy-deep:   #091a31;  /* navy hover, closing band                  */
+  --pl-gold:        #B8862B;  /* RARE accent: primary CTA + radar lock     */
+  --pl-gold-deep:   #8E6817;  /* gold hover, eyebrows, accented labels     */
+  --pl-gold-pale:   #D4AF5C;  /* intermediate gold states                  */
+  --pl-gold-light:  #EFD9A1;  /* gold on navy surfaces                     */
+  --pl-paper:       #F6F3EC;  /* secondary surfaces, alternating cards     */
+  --pl-muted:       #8A93A6;  /* secondary text                            */
+  --pl-white:       #FFFFFF;  /* primary background                        */
+
+  --pl-border:        rgba(14, 42, 78, 0.08);
+  --pl-border-strong: rgba(14, 42, 78, 0.16);
+
+  /* Prose on white, at the two opacities the design uses. */
+  --pl-prose:      rgba(14, 42, 78, 0.75);
+  --pl-prose-soft: rgba(14, 42, 78, 0.72);
+
+  /* ---- Ceremonial (navy closing band — the only dark surface) ---- */
+  --pl-ceremonial-bg:     var(--pl-navy-deep);
+  --pl-ceremonial-fg:     var(--pl-white);
+  --pl-ceremonial-accent: var(--pl-gold);
+  --pl-ceremonial-muted:  rgba(255, 255, 255, 0.72);
+
+  /* ---- Families ---- */
+  --pl-font-display: 'Rajdhani', system-ui, sans-serif;               /* titles / display */
+  --pl-font-body:    'Crimson Pro', Georgia, serif;                   /* prose            */
+  --pl-font-mono:    'JetBrains Mono', ui-monospace, Menlo, monospace; /* data/labels     */
+
+  /* ---- Tracking ---- */
+  --pl-track-tight:   -0.02em;   /* display / titles */
+  --pl-track-eyebrow:  0.22em;   /* mono eyebrows    */
+
+  /* ---- Radius ---- */
+  --pl-radius-sm:   4px;
+  --pl-radius-md:   8px;
+  --pl-radius-lg:   14px;   /* default cards */
+  --pl-radius-pill: 999px;
+
+  /* ---- Shadow ---- */
+  --pl-shadow-sm: 0 2px 6px rgba(14, 42, 78, 0.06);
+  --pl-shadow-md: 0 8px 24px rgba(14, 42, 78, 0.10);
+
+  /* ---- Focus ring (gold — visible keyboard focus is MANDATORY) ---- */
+  --pl-focus-ring: 0 0 0 3px rgba(184, 134, 43, 0.32);
+
+  /* ---- Motion ---- */
+  --pl-ease:     cubic-bezier(0.16, 1, 0.3, 1);
+  --pl-dur-fast: 0.25s;
+  --pl-dur-base: 0.45s;
+}
+
+/* Mandatory visible keyboard focus everywhere. */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: none;
+  box-shadow: var(--pl-focus-ring);
+  border-radius: var(--pl-radius-sm);
+}
+
+/* ---- Reduced motion: keep end states, drop drifts/sweeps ---- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
